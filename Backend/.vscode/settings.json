@@ -1,0 +1,6 @@
+{
+    "liveServer.settings.port": 5501,
+    "yaml.schemas": {
+        "swaggerviewer:openapi": "file:///home/simon329b/GIT/GIT_OC/OC_Project-6_JavaScript/Portfolio-architecte-sophie-bluel/Backend/swagger.yaml"
+    }
+}
