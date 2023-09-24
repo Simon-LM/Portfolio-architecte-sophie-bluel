@@ -1,5 +1,11 @@
 {
     "yaml.schemas": {
         "openapi:v3": "file:///home/simon329b/GIT/GIT_OC/OC_Project-6_JavaScript/Portfolio-architecte-sophie-bluel/FrontEnd/assets/openapi%3A%20%273.0.yml"
-    }
+    },
+    "git-blame.gitWebUrl": "",
+    "console-ninja.allowedHosts": [
+        "http://127.0.0.1:5500/",
+        "https://github.com/Simon-LM/Portfolio-architecte-sophie-bluel/blob/3df26d3c999159a8ccf8ff49b1d40b8beeb4e8d1/FrontEnd/assets/script.js"
+    ],
+    "liveServer.settings.port": 5501
 }
