@@ -1,54 +1,41 @@
 console.log("Page JAvaScripte")
 
-
-const myFirstImage = document.getElementById('img_01')
-const myFirstImageSRC_has = myFirstImage.hasAttribute("src")
-const myFirstImageSRC = myFirstImage.getAttribute("src")
-console.log(myFirstImageSRC_has)
-console.log(myFirstImageSRC)
-
-
+const gallery = document.querySelector('.gallery')
 
 fetch("http://localhost:5678/api/works")
   .then(function (response) {
-    if (response.ok) {
-      
+    if (response.ok) {      
       return response.json()
         .then(function (json) {
+        
+        let jsonLength = json.length
+        for (let pas = 0; pas < jsonLength; pas++) {
+          const galleryArray = [json[pas]]
+          
+          galleryArray.forEach((element) => {
+            console.log(`GalleryArray ID : ${pas}`)
 
-        myFirstImage.setAttribute("src", json[0].imageUrl)
-        myFirstImage.setAttribute("alt", json[0].title)
-        // myFirstImageTitle.setAttribute("alt", json[0].title)
-              
-          
-          
-        console.log(response.status)
-        console.log(response.url)
-        console.log(response.ok)
-        console.log(response)
-        console.log(json[0].imageUrl)
-        console.log(myFirstImageSRC)
+            let create_figure = document.createElement("figure")
+            create_figure.innerHTML = `<img src="${[element.imageUrl]}" alt="${[element.title]}"><figcaption>${[element.title]}</figcaption>`
+            gallery.append(create_figure)
+                  
+            console.log(response.ok)
+
+            console.log(response.status)
+
+            console.log(create_figure)
+            console.log(element)
+          })            
+        }
       })
-
     }
     else {
       console.log("Mauvaise réponse du réseau")
       console.log(response.status)
-      console.log(response.url)
-      console.log(response.ok)
-      console.log(response)
-
+      
     }
   })
   .catch(function (error) {
-    console.log(
-      "Il y a eu un problème avec l'opération fetch : " + error.message,)
-    console.log(response.status)
-    console.log(response.url)
-    console.log(response.ok)
-  })
-
-
-
-
-
+    console.log("Il y a eu un problème avec l'opération fetch : " + error.message,)
+  }
+)
