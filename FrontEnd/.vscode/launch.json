@@ -3,14 +3,26 @@
     // Pointez pour afficher la description des attributs existants.
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [        
+        {
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "Launch add-on",
+            "addonPath": "${workspaceFolder}"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
         {
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
             "port": 9003
         },
-        
         {
             "name": "Launch Chrome",
             "request": "launch",
@@ -19,4 +31,5 @@
             "webRoot": "${workspaceFolder}"
         }
     ]
+
 }

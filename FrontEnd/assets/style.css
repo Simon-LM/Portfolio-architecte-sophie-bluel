@@ -48,20 +48,32 @@ table {
 }
 /** end reset css**/
 
-/***** CSS var *****/
+/***** CSS var & recurrent *****/
 :root { 
 --main-color: black;
+--main-less-contrast-color: #3D3D3D;
 --main-bg-color: white;
 --primary-color: #1D6154;
 --secondary-color: #B1663C;
 }
-/* var(--secondary-color); --main-color --main-bg-color --primary-color --secondary-color */
+a, nav {
+	color: var(--main-color);
+	text-decoration: none;	
+}
+a:hover, nav:hover {
+	color: var(--primary-color);
+	cursor: pointer;	
+}
 /***** end CSS var *****/
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
 }
 header {
 	display: flex;
@@ -71,7 +83,6 @@ header {
 section {
 	margin: 50px 0
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -80,13 +91,11 @@ h1{
 	font-weight: 800;
 	color: var(--secondary-color);
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
 }
-
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -103,10 +112,10 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
-li:hover {
+nav li:hover {
 	color: var(--primary-color);
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -119,17 +128,16 @@ li:hover {
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
 	flex: 1
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -141,52 +149,68 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-
 .gallery img {
 	width: 100%;
 
 }
-#contact {
+
+#contact, #authentication {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+#contact > *, , #authentication > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2, #authentication h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #authentication form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
-
-#contact input {
+#contact input, #authentication input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #authentication label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-
+#authentication h2 {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+}
+#forgotpassword {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	text-decoration: underline;
+}
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
+	color: var(--main-bg-color);
 	background-color: var(--primary-color);
 	margin : 2em auto ;
-	width: 180px;
+	padding: 0 5em;
 	text-align: center;
 	border-radius: 60px ;
+}
+#authentication input[type="submit"]{
+	padding: 0 4em;
+}
+input[type="submit"]:hover{
+	opacity: 0.75;
+	cursor: pointer;
 }
 
 footer nav ul {
@@ -204,7 +228,6 @@ footer nav ul {
 	gap: 1em;
     margin: 4em 0; 
 }
-
 #filters .button {
     display: flex;
     align-items: center;
@@ -221,11 +244,13 @@ footer nav ul {
     min-width: 6em; 
 	cursor: pointer;
 }
-
 #filters .button:hover {
     background-color: var(--primary-color);
 	color: var(--main-bg-color);
 }
+
+
+
 
 
 /* var(--main-bg-color); */
@@ -263,4 +288,60 @@ text-align: center;
 
 color: #FFFFFF; */
 
+
+
+
+/* PAGE AUTHENTIFICATION */
+
+
+
+/* Log In
+
+position: absolute;
+width: 100px;
+height: 36px;
+left: 669px;
+top: 242px;
+
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 30px;
+line-height: 36px; */
+
+/* Mot de passe oublié
+position: absolute;
+width: 139px;
+height: 16px;
+left: 651px;
+top: 593px;
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+text-decoration-line: underline;
+color: #3D3D3D; */
+
+/* E-mail
+position: absolute;
+width: 46px;
+height: 16px;
+left: 530px;
+top: 315px;
+font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color: #3D3D3D; */
+
+/* INPUT authentification
+position: absolute;width: 379px;
+height: 51px;
+left: 530px;
+top: 338px;
+
+background: #FFFFFF;
+box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09); */
 
