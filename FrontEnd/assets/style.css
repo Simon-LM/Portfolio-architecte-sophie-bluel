@@ -47,6 +47,16 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+/***** CSS var *****/
+:root { 
+--main-color: black;
+--main-bg-color: white;
+--primary-color: #1D6154;
+--secondary-color: #B1663C;
+}
+/* var(--secondary-color); --main-color --main-bg-color --primary-color --secondary-color */
+/***** end CSS var *****/
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -68,21 +78,20 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: var(--secondary-color);
 }
 
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--primary-color);
 }
 nav ul {
 	display: flex;
@@ -96,7 +105,7 @@ nav li {
 }
 
 li:hover {
-	color: #B1663C;
+	color: var(--primary-color);
 }
 #introduction {
 	display: flex;
@@ -173,7 +182,7 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--primary-color);
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
@@ -185,4 +194,73 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+#filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+	justify-content: center;
+    align-items: center;
+	gap: 1em;
+    margin: 4em 0; 
+}
+
+#filters .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+	font-family: 'Syne';
+    font-size: 1rem;
+	line-height: 1.5em;
+    font-weight: 700;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 60px;
+	padding: 0.75em;
+    min-width: 6em; 
+	cursor: pointer;
+}
+
+#filters .button:hover {
+    background-color: var(--primary-color);
+	color: var(--main-bg-color);
+}
+
+
+/* var(--main-bg-color); */
+
+
+/* Rectangle 26 */
+/* 
+box-sizing: border-box;
+
+position: absolute;
+width: 100px;
+height: 37px;
+left: 427px;
+top: 812px;
+
+background: #1D6154;
+border: 1px solid #1D6154;
+border-radius: 60px; */
+
+
+/* Tous */
+/* 
+position: absolute;
+width: 42px;
+height: 19px;
+left: 455px;
+top: 821px;
+
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+
+color: #FFFFFF; */
+
 
