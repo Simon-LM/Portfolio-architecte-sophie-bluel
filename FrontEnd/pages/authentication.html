@@ -8,8 +8,12 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="../assets/style.css">
-	<script src="../assets/scripts/galleries.js" async></script>
+	<link rel="stylesheet" href="../assets/style.css">	
+	<script src="../assets/scripts/authentication.js" async></script>
+	<!-- <script src="https://unpkg.com/feather-icons"  async></script> -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	<!-- <script>feather.replace();</script> -->
+	<!-- <script src="../assets/scripts/authentication.js" async></script> -->
 </head>
 <body>
     <header>
@@ -25,12 +29,17 @@
 	</header>
 	<main>
 		<section id="authentication">
-			<h2>Log In</h2>
+			<h2>Log In</i></h2>
 			<form action="#" method="post">
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" required>
-				<label for="password">Mot de passe</label>
-				<input type="password" id="password" autocomplete="current-password" size="12" required>
+				<input type="email" name="email" id="email-id" required>
+				<label for="password" class="password-icon">Mot de passe
+					<input type="password" id="password-id" autocomplete="current-password" size="12" required>
+					<div class="password-icon">
+						<span class="material-symbols-outlined icon-eye-off">visibility_off</span>
+						<span class="material-symbols-outlined icon-eye">visibility</span>
+					</div>
+				</label>
 				<input type="submit" value="Se connecter" class="to-login-btn">
 			</form>
 			<div id="forgotpassword"><a href="#">Mot de passe oublié</a></div>			

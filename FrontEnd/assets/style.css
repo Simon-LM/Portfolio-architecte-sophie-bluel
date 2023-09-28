@@ -176,6 +176,7 @@ nav li:hover {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 0 1em;
 }
 #contact label, #authentication label {
 	margin: 2em 0 1em 0;
@@ -211,6 +212,32 @@ input[type="submit"]{
 input[type="submit"]:hover{
 	opacity: 0.75;
 	cursor: pointer;
+}
+label {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	color: var(--main-less-contrast-color);
+	gap: 1em;
+	transition: all 0.2s;
+}
+label .password-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 3em;
+	right: 1em;
+	color: var(--secondary-color);
+	transition: all 0.2s;
+}
+label .password-icon:hover {
+	cursor: pointer;
+	opacity: 0.80;
+}
+label .password-icon .icon-eye {
+	display: none;
+	color: var(--primary-color);
 }
 
 footer nav ul {
