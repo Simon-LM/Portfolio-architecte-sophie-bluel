@@ -64,7 +64,7 @@ submit.addEventListener("submit", function (event) {
                 if (jsonResponseAPI.token) {
                     const token = JSON.stringify(jsonResponseAPI.token)
                     console.log(responseAPI.status)
-                    console.log(jsonResponseAPI)
+                    // console.log(jsonResponseAPI)
                     console.log(token)
                     window.localStorage.setItem("token", token)
                     window.location = "../index.html"

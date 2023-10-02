@@ -55,6 +55,7 @@ table {
 --main-bg-color: white;
 --primary-color: #1D6154;
 --secondary-color: #B1663C;
+--hide-button-color: #A7A7A7;
 }
 a, nav {
 	color: var(--main-color);
@@ -145,17 +146,31 @@ nav li:hover {
 #portfolio h2 {
 	text-align: center;
 }
-.gallery {
+#portfolio .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
-.gallery img {
+#portfolio .gallery img {
 	width: 100%;
 
 }
+/* #modale .gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+#modale .gallery img {
+	width: 100%;
+
+} */
+
+
+
 
 #contact, #authentication {
 	width: 50%;
@@ -220,6 +235,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	z-index: 1;
 	color: var(--main-less-contrast-color);
 	gap: 1em;
 	transition: all 0.2s;
@@ -229,6 +245,7 @@ label .password-icon {
 	justify-content: center;
 	align-items: center;
 	position: absolute;
+	z-index: 1;
 	top: 3em;
 	right: 1em;
 	color: var(--secondary-color);
@@ -288,9 +305,15 @@ footer nav ul {
 #modale .button:hover {
 	opacity: 0.80;
 }
+#modale .hide-button {
+	background: var(--hide-button-color);
+	border-color: var(--hide-button-color);
+	cursor: not-allowed;
+}
 
 #edition {
 	position: relative;
+	z-index: 2;
 	/* top: 0; */
 	/* right: 0; */
 	/* height: 1rem; */
@@ -313,6 +336,9 @@ footer nav ul {
  	font-size: 1em;
  	font-weight: 500;
 }
+.fa-pen-to-square:hover {
+	cursor: pointer;
+}
 
 .edit {
 	/* position: relative; */
@@ -323,24 +349,43 @@ footer nav ul {
 	font-weight: 500;
 	padding-left: 1em;
 }
+
+.edit:hover {
+	cursor: pointer;
+	color: var(--primary-color);
+}
+
 .hidden {
 	visibility: hidden;
 }
-
-#modale {
-	--modale-size: 60vmin;
+#background-modale {
+	display: none;
 	position: fixed;
+	z-index: 2;
+	height: 100vh;
+	width: 100vw;
+	max-width: 1140px;
+	background: var(--main-less-contrast-color);
+	opacity: 0.5;
+	margin-top: -3rem;
+}
+#background-modale:hover {
+	cursor: move;
+}
+#modale {
+	/* 1140px */
+	--modale-size: clamp(30vmin, 50rem, 85vmin);
+	display: block;
+	position: fixed;
+	z-index: 3;
 	top: calc((100vh - var(--modale-size)) / 2);
 	right: calc((100% - var(--modale-size)) / 2);
 	height: var(--modale-size);
-	/* max-height: calc((1140px / 100) * 80); */
 	width: var(--modale-size);
-	/* max-width: calc((1140px / 100) * 80); */
 	background: var(--main-bg-color);
-	border-radius: 3%;
+	border-radius: 2%;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	padding: 1rem;
-	/* padding-bottom: 4rem; */
 	margin-right: -1rem ;
 }
 .modale__header {
@@ -348,8 +393,6 @@ footer nav ul {
 	flex-direction: row;
 	justify-content: space-between;
 	width: 100%;
-	/* font-size: 0.5rem; */
-	/* font-weight: 700; */
 }
 .material-symbols-outlined {
 	font-size: 1rem;
@@ -358,6 +401,9 @@ footer nav ul {
 #modale .material-symbols-outlined:hover {
 	opacity: 0.75;
 	cursor: pointer;
+}
+#modale-arrow-back {
+	visibility: hidden;
 }
 .content-modale {
 	display: flex;
@@ -387,6 +433,48 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin-bottom: 2rem;
 }
+
+#modale .gallery-modale {
+	/* 1140px */
+	--gallery-modale-size: clamp(45vmin, 30rem, 65vmin);
+	/* width: 10vmin; */
+	width: var(--gallery-modale-size);
+	display: grid;
+	/* box-sizing: border-box; */
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+#modale .gallery-modale img {
+	position: relative;
+	z-index: 4;
+	width: 100%;
+	
+}
+#modale .gallery-modale .fa-trash-can {
+	position: relative;
+	z-index: 5;
+	display: flex;
+	/* flex-direction: row-reverse; */
+	justify-content: center;
+	align-items: center;
+	color: var(--main-bg-color);
+	background: var(--main-color);
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 20%;
+	margin-bottom: -35%;
+	margin-left: 65%;
+}
+#modale .gallery-modale .fa-trash-can:hover {
+	cursor: pointer;
+}
+#modale .gallery-modale .fa-trash-can:hover + img {
+	opacity: 0.8;
+}
+
+
 /* Line 1
 position: absolute;
 width: 420px;
@@ -394,3 +482,35 @@ height: 0px;
 left: 510px;
 top: 1229px;
 border: 1px solid #B3B3B3; */
+
+/* Group 2
+position: absolute;
+width: 237px;
+height: 36px;
+left: 600px;
+top: 1239px;
+
+Rectangle 15
+position: absolute;
+width: 237px;
+height: 36px;
+left: 600px;
+top: 1239px;
+background: #A7A7A7;
+border-radius: 60px;
+
+Valider
+position: absolute;
+width: 139px;
+height: 17px;
+left: 649px;
+top: 1249px;
+font-family: 'Syne';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 17px;
+identical to box height
+text-align: center;
+color: #FFFFFF; */
+

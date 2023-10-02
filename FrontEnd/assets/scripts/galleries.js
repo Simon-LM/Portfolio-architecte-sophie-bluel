@@ -16,7 +16,7 @@ function galleryAll(filterCategoriesSelected) {
         for (let pas = 0; pas < json.length; pas++) {
           let createFigure = document.createElement("figure")
           console.log(`GalleryArray ID : ${pas}`)
-          createFigure.innerHTML = `<img src="${json[pas].imageUrl}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
+          createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_0${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
           let categoryId = json[pas].categoryId
           if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
             console.log(`categories not selected : ${filterCategoriesSelected}`)
@@ -52,9 +52,8 @@ fetch(urlCategoriesAPI)
       console.log(json)
       for (let pas = 0; pas < json.length; pas++) {   
         let createDiv = document.createElement("div")
-        // createDiv.setAttribute("class", "filterss")
         createDiv.innerHTML = `<div id="filter_0${json[pas].id}" class="button">${json[pas].name}</div>`
-        filters.append(createDiv)
+        filtersLocationHTML.append(createDiv)
         console.log(response.ok)
         console.log(response.status)
         console.log(createDiv)
@@ -63,7 +62,7 @@ fetch(urlCategoriesAPI)
       for (let pas = 0; pas < json.length + 1; pas++) {
         let selectedButtonsFilter = document.querySelector(`#filter_0${pas}`)
       // CLICK ON BUTTON
-        selectedButtonsFilter.addEventListener("click", function (events) {
+        selectedButtonsFilter.addEventListener("click", function () {
         console.log(`click on filter_0${pas}`)
         // WRITE SELECTED FILTER ON HTML
           if (`filter_0${pas}` !== `filter_00`) {

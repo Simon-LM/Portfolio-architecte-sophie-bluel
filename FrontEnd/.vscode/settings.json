@@ -4,7 +4,7 @@
     },
     "git-blame.gitWebUrl": "",
     "console-ninja.allowedHosts": [
-        "http://127.0.0.1:5500/",
+        "http://127.0.0.1:5501/",
         "https://github.com/Simon-LM/Portfolio-architecte-sophie-bluel/blob/3df26d3c999159a8ccf8ff49b1d40b8beeb4e8d1/FrontEnd/assets/script.js"
     ],
     "liveServer.settings.port": 5501
