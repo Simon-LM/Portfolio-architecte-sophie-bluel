@@ -16,7 +16,7 @@ function galleryAll(filterCategoriesSelected) {
         for (let pas = 0; pas < json.length; pas++) {
           let createFigure = document.createElement("figure")
           console.log(`GalleryArray ID : ${pas}`)
-          createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_0${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
+          createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
           let categoryId = json[pas].categoryId
           if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
             console.log(`categories not selected : ${filterCategoriesSelected}`)
