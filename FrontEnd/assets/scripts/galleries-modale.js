@@ -12,16 +12,58 @@ function galleryModale(filterCategoriesSelectedModale) {
       .then(function (json) {
         console.log("json :") 
         for (let pas = 0; pas < json.length; pas++) {
-          let createFigure = document.createElement("figure")
-          console.log(`GalleryArray ID : ${pas}`)
-          createFigure.innerHTML = `<i class="img_${json[pas].id} fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
           
+          let createFigure = document.createElement("figure")
+          createFigure.innerHTML = `<i class="img_${json[pas].id} fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
+
+          // const creatGalleryModale() {
+
+            // let createFigure = document.createElement("figure")
+          
+            // createFigure.innerHTML = `<i class="img_${json[pas].id} fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
+          
+            // galleryLocationModale.append(createFigure)
+
+
+
+
+
+
+
+            // const galleryLocationModale = document.querySelector('.gallery-modale')
+            // let createFigure = document.createElement("figure")
+              
+            // galleryLocationModale.append(createFigure.setAttribute("class", `fig_${json[pas].id}`))
+            // let figureLocation = document.querySelector(`.fig_${json[pas].id}`)  
+            
+            // let createI = document.createElement("i")
+            // let createIMG = document.createElement("img")
+          
+            // figureLocation.append(createI.setAttribute("class", `img_${json[pas].id} fa-solid fa-trash-can`))
+            // let iLocation = document.querySelector(`.img_${json[pas].id}`)
+            // iLocation.setAttribute("alt", "Poubelle")
+            // iLocation.setAttribute("title", `Supprimer : ${json[pas].title}`)
+          
+            // figureLocation.appendChild(createIMG.setAttribute("id", `img_0${json[pas].id}`))
+            // let imgLocation = document.querySelector(`.img_0${json[pas].id}`)
+            // imgLocation.setAttribute("src",`${json[pas].imageUrl}`)
+            // imgLocation.setAttribute("alt", `${json[pas].title}"`)
+            // imgLocation.setAttribute("title", `${json[pas].title}`)
+          // }
+
+
+
+
+          
+          console.log(`GalleryArray ID : ${pas}`)
           let categoryId = json[pas].categoryId
           if (categoryId !== filterCategoriesSelectedModale & filterCategoriesSelectedModale !== 0) {
             console.log(`categories not selected : ${filterCategoriesSelectedModale}`)
           }
           else {
             galleryLocationModale.append(createFigure)
+            // creatGalleryModale(pas) 
+
             console.log(`categories selected : ${filterCategoriesSelectedModale}`)
           }
           console.log(response.ok)
@@ -79,3 +121,4 @@ function trashListener() {
     })
   })
 }
+

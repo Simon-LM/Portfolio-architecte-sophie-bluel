@@ -32,6 +32,25 @@
 			<div class="content-modale">
 				<h3 id="title-modale" class="title-modale">Galerie photo</h3>
 				<div class="gallery-modale"></div>
+				<div class="add-img-modale">
+					<form action="#" method="post">
+						<label for="add-image" class="frame-add-img">
+							<i id="icon-add-image" class="fa-regular fa-image"></i>
+							<div id="format-add-image" class="button">+ Ajouter photo</div>
+							<div id="button-add-image">jpg, png : 4Mo max</div>
+							<input type="file" name="add-image" class="frame-add-img" id="add-image" alt="+Ajouter photo" accept="image/png, image/jpeg" required>
+							<img id="show-img-download" src="">
+						</label>
+						<label for="file-name">Titre
+							<input type="text" name="file-name" id="file-name" required>
+						</label>
+						<label for="id-categorie-choice">Catégorie
+							<select name="id-categorie-choice" id="id-categories-choice" required>
+							</select>
+						</label>
+						<input type="submit" value="Valider" id=btn-add-img class="">
+					</form>
+				</div>
 				<div class="bottom-modale">
 					<div class="line-modale"></div>
 					<div id="btn-modale--validation" class="button">Ajouter une photo</div>
