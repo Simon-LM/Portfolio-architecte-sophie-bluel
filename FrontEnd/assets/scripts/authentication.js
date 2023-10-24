@@ -65,7 +65,8 @@ const token = window.localStorage.getItem("token")
                                 console.log(responseAPI.status)
                             }
                             if (jsonResponseAPI.token) {
-                                const token = JSON.stringify(jsonResponseAPI.token)
+                                // const token = JSON.stringify(jsonResponseAPI.token)
+                                const token = jsonResponseAPI.token
                                 console.log(responseAPI.status)
                                 console.log(token)
                                 window.localStorage.setItem("token", token)

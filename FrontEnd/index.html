@@ -26,34 +26,36 @@
 		<div id="background-modale"></div>
 		<div id="modale">
 			<div class="modale__header">
-				<span id="modale-arrow-back" class="material-symbols-outlined">arrow_back</span>
-				<span id="modale-close" class="material-symbols-outlined">close</span>
+				<button id="modale-arrow-back"><span class="material-symbols-outlined">arrow_back</span></button>
+				<button id="modale-close" ><span class="material-symbols-outlined">close</span></button>
 			</div>
 			<div class="content-modale">
 				<h3 id="title-modale" class="title-modale">Galerie photo</h3>
 				<div class="gallery-modale"></div>
 				<div class="add-img-modale">
-					<form action="#" method="post">
+					<form  name="fileinfo" id="image-form">
 						<label for="add-image" class="frame-add-img">
 							<i id="icon-add-image" class="fa-regular fa-image"></i>
-							<div id="format-add-image" class="button">+ Ajouter photo</div>
-							<div id="button-add-image">jpg, png : 4Mo max</div>
-							<input type="file" name="add-image" class="frame-add-img" id="add-image" alt="+Ajouter photo" accept="image/png, image/jpeg" required>
+							<div id="button-add-image" class="button">+ Ajouter photo</div>
+							<div id="format-add-image">jpg, png : 4Mo max</div>
+							<input type="file" name="image" class="frame-add-img" id="add-image" alt="+Ajouter photo" accept="image/png, image/jpeg" required>
 							<img id="show-img-download" src="">
 						</label>
 						<label for="file-name">Titre
-							<input type="text" name="file-name" id="file-name" required>
+							<input type="text" name="title" id="file-name" placeholder="" value="" required>
 						</label>
 						<label for="id-categorie-choice">Catégorie
-							<select name="id-categorie-choice" id="id-categories-choice" required>
+							<select name="category" id="id-categories-choice" required>
+								<option value="" id="option-filter_00" selected disabled>Sélectionnez une catégorie</option>
 							</select>
 						</label>
 						<input type="submit" value="Valider" id=btn-add-img class="">
 					</form>
+					<!-- <div id="outpout-add-image"></div> -->
 				</div>
 				<div class="bottom-modale">
 					<div class="line-modale"></div>
-					<div id="btn-modale--validation" class="button">Ajouter une photo</div>
+					<button id="btn-modale--validation" class="button">Ajouter une photo</button>
 				</div>
 			</div>
 		</div>

@@ -14,46 +14,7 @@ function galleryModale(filterCategoriesSelectedModale) {
         for (let pas = 0; pas < json.length; pas++) {
           
           let createFigure = document.createElement("figure")
-          createFigure.innerHTML = `<i class="img_${json[pas].id} fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
-
-          // const creatGalleryModale() {
-
-            // let createFigure = document.createElement("figure")
-          
-            // createFigure.innerHTML = `<i class="img_${json[pas].id} fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
-          
-            // galleryLocationModale.append(createFigure)
-
-
-
-
-
-
-
-            // const galleryLocationModale = document.querySelector('.gallery-modale')
-            // let createFigure = document.createElement("figure")
-              
-            // galleryLocationModale.append(createFigure.setAttribute("class", `fig_${json[pas].id}`))
-            // let figureLocation = document.querySelector(`.fig_${json[pas].id}`)  
-            
-            // let createI = document.createElement("i")
-            // let createIMG = document.createElement("img")
-          
-            // figureLocation.append(createI.setAttribute("class", `img_${json[pas].id} fa-solid fa-trash-can`))
-            // let iLocation = document.querySelector(`.img_${json[pas].id}`)
-            // iLocation.setAttribute("alt", "Poubelle")
-            // iLocation.setAttribute("title", `Supprimer : ${json[pas].title}`)
-          
-            // figureLocation.appendChild(createIMG.setAttribute("id", `img_0${json[pas].id}`))
-            // let imgLocation = document.querySelector(`.img_0${json[pas].id}`)
-            // imgLocation.setAttribute("src",`${json[pas].imageUrl}`)
-            // imgLocation.setAttribute("alt", `${json[pas].title}"`)
-            // imgLocation.setAttribute("title", `${json[pas].title}`)
-          // }
-
-
-
-
+          createFigure.innerHTML = `<button id="btn-trash" class="img_${json[pas].id}"><i class="fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i></button><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_000${json[pas].id}">`
           
           console.log(`GalleryArray ID : ${pas}`)
           let categoryId = json[pas].categoryId
@@ -85,7 +46,7 @@ function galleryModale(filterCategoriesSelectedModale) {
 galleryModale(0)
 
 function trashListener() { 
-  let trashs = document.querySelectorAll(`.fa-trash-can`)
+  let trashs = document.querySelectorAll(`#btn-trash`)
   console.log(`trash :` + trashs.length)
   trashs.forEach(trash => {
     trash.addEventListener("click", () => {     
@@ -99,7 +60,7 @@ function trashListener() {
       console.log(trashPhotoOnlyID)
       // API Fetch for delete image selected
       const urlDeleteImageAPI = `http://localhost:5678/api/works/${trashPhotoOnlyID}`
-      const token = window.localStorage.getItem("token").replace('"','').replace('"','')
+      const token = window.localStorage.getItem("token")/* .replace('"','').replace('"','') */
       console.log(token)
       const requestDeleteImageAPI = {
         method: "DELETE",
