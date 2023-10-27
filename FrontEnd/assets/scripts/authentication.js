@@ -1,29 +1,28 @@
 console.log("Page JAvaScripte | AUTHENTICATION")
 
 // Password visibility ON/OFF //
-const eyes = document.getElementById("eyes");
-const eyeOn = document.getElementById("eye-on");
-const eyeOff = document.getElementById("eye-off");
-const passwordField = document.querySelector("input[type=password]");
-const showErrorIdentifier = document.getElementById("title-identifier");
-const showErrorPassword = document.getElementById("title-password");
+const eyes = document.getElementById("eyes")
+const eyeOn = document.getElementById("eye-on")
+const eyeOff = document.getElementById("eye-off")
+const passwordField = document.querySelector("input[type=password]")
+const showErrorIdentifier = document.getElementById("title-identifier")
+const showErrorPassword = document.getElementById("title-password")
 eyes.addEventListener("click", () => {
     if (passwordField.type !== "text") {
-        eyeOff.style.display = "none";
-        eyeOn.style.display = "block";
-        passwordField.type = "text";
+        eyeOff.style.display = "none"
+        eyeOn.style.display = "block"
+        passwordField.type = "text"
         console.log("Click to make the password visible") 
     } else {
-        eyeOn.style.display = "none";
-        eyeOff.style.display = "block";
-        passwordField.type = "password";
+        eyeOn.style.display = "none"
+        eyeOff.style.display = "block"
+        passwordField.type = "password"
         console.log("Click for hidden the password")
     }
-});
-
+})
 // Log IN or OUT // 
 const token = window.localStorage.getItem("token")
-    // AUTHENTICATION | Log IN
+    // // // AUTHENTICATION | Log IN
     let submit = document.querySelector("#authentication")
     submit.addEventListener("submit", function (event) {
         console.log("click on submit")

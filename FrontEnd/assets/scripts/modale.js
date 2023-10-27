@@ -1,6 +1,6 @@
 console.log("Page JAvaScripte | MODALE")
 
-// LOGOUT // 
+// // // LOGOUT // // //
 const editingBar = document.querySelector("#editing-bar")
 const editMode = document.querySelector(".edit-in-out")
 const logInOrOut = document.querySelector(".log-in-out")
@@ -27,13 +27,21 @@ if (token !== null) {
     })
 }
 
+// // //  MODALE // // //
+const titleModale = document.getElementById("title-modale")
+const validationButtonModale = document.getElementById("btn-modale--validation")
+const galleryModaleVisibility = document.querySelector(".gallery-modale")
+const addImageModaleVisibility = document.querySelector(".add-img-modale")
+const buttonAddImageModale = document.getElementById("btn-add-img")
+const InputImageFiles = document.getElementById("add-image")
+const inputCategory = document.getElementById("id-categories-choice")
 
-
-const backgroundModale = document.querySelector("#background-modale")
+// // //  HIDE MODALE
+const backgroundModale = document.getElementById("background-modale")
 backgroundModale.style.display = "none" 
-const modale = document.querySelector("#modale")
+const modale = document.getElementById("modale")
 modale.style.display = "none" 
-
+// // // SHOW MODALE
 const openModale = document.querySelectorAll(".fa-pen-to-square, .edit")
 openModale.forEach(element => {
     element.addEventListener("click", () => {
@@ -42,7 +50,7 @@ openModale.forEach(element => {
         console.log("Click for OPEN the MODALE")
     })
 })
-
+// // // CLOSE MODALE
 const crossModale = document.querySelectorAll("#modale-close, #background-modale")
 function closeModale(){
   backgroundModale.style.display = "none"
@@ -55,12 +63,8 @@ crossModale.forEach(element => {
     })
 })
 
-const arrowBackModale = document.querySelector("#modale-arrow-back")
-const validationButtonModale = document.querySelector ("#btn-modale--validation")
-const titleModale = document.querySelector("#title-modale")
-const galleryModaleVisibility = document.querySelector(".gallery-modale")
-const addImageModaleVisibility = document.querySelector(".add-img-modale")
-const buttonAddImageModale = document.querySelector("#btn-add-img")
+// // //  ARROW BACK
+const arrowBackModale = document.getElementById("modale-arrow-back")
 arrowBackModale.addEventListener("click", () => {
   console.log("Click for ARROW BACK on the MODALE")
   arrowBackModale.style.visibility = "hidden"
@@ -72,7 +76,7 @@ arrowBackModale.addEventListener("click", () => {
   addImageModaleVisibility.style.visibility = "collapse"
   addImageModaleVisibility.style.position = "initial"
 })
-
+// // //  BUTTON VALIDATION
 validationButtonModale.addEventListener("click", () => {
     console.log("Click for VALIDATIOM BUTTON on the MODALE")
     let getClass = validationButtonModale.getAttribute("class")
@@ -89,150 +93,9 @@ validationButtonModale.addEventListener("click", () => {
     }    
 })
 
-const datalistAddImage = document.querySelector("#id-categories-choice")
-fetch(urlCategoriesAPI)
-.then(function (response) {
-  if (response.ok) {      
-    return response.json()
-    .then(function (json) {
-        console.log(json)        
-        for (let pas = 0; pas < json.length; pas++) {
-        let createOption = document.createElement("option")     
-        createOption.innerHTML = `<option value="${json[pas].id}" id="option-category_0${json[pas].id}" class="option-category_${json[pas].name.replaceAll(' ', '-').replaceAll('&', '')}">${json[pas].name}</option>`
-        datalistAddImage.append(createOption)                    
-        console.log(response.ok)
-        console.log(response.status)
-        console.log(createOption)
-      }        
-    })
-  }
-  else {
-    console.log("Mauvaise réponse du réseau")
-    console.log(response.status)      
-  }
-})
-.catch(function (error) {
-  console.log("Il y a eu un problème avec l'opération fetch pour les catégories pour ajouter des images : " + error.message,)
-})
+// // // // // ADD NEW IMAGE // // // // //
 
-
-// const listenAddTitleImage = document.querySelector(".add-img-modale")
-const listenAddTitleImage = document.getElementById("image-form")
-// let imageDownload = document.getElementById("add-image")
-// let curFiles = imageDownload.files
-listenAddTitleImage.addEventListener("change", () => {
-  const seeAddTitleImage = document.getElementById("file-name").value
-  const seeAddFileImage = document.getElementById("add-image").value
-  const clickForValidation = document.getElementById("btn-add-img")
-  if (clickForValidation.addEventListener("click", () => {
-    console.log("Click for validation send image 1")
-  })) {
-    // console.log("Click for validation send photo 2")
-  } else {
-    if (seeAddFileImage !== "" && seeAddTitleImage !== "" ) {
-      buttonAddImageModale.setAttribute("class", "")
-      // buttonAddImageModale.style.background = "#1D6154"
-      console.log("Tous les champs sont remplis")
-    }
-    else {
-      buttonAddImageModale.setAttribute("class", "hide-button")
-      // buttonAddImageModale.style.background = "#A7A7A7"
-      console.log("Tous les champs ne sont pas remplis")
-    }
-  }
-})
-listenAddTitleImage.addEventListener("change", () => {  
-  const seeAddFileImage = document.getElementById("add-image").files
-  if (seeAddFileImage !== "") {
-    const imageDownload = document.getElementById("add-image")
-    var curFiles = imageDownload.files
-    console.log(curFiles)
-    console.log(curFiles[0])
-    console.log(curFiles[0]?.name)
-    console.log(curFiles[0]?.size)
-    var image = document.createElement("img")
-    const framAddImage = document.querySelector(".frame-add-img")
-    const showIconAddImage = document.getElementById("icon-add-image")
-    const showButtonAddImage = document.getElementById("button-add-image")
-    const showFormatAddImage = document.getElementById("format-add-image")
-    const showImage = document.getElementById("show-img-download")
-    const showSizeImage = document.getElementById("show-size-img-download")
-    const inputTitleImage = document.getElementById("file-name")
-    // const showErrorMessage = document.querySelector(".line-modale")
-    buttonAddImageModale.value = "Valider"
-    // buttonAddImageModale.setAttribute("class", "hide-button")
-    backgroundModale.style.background = "black"
-    if (curFiles[0] !== undefined) {
-      image.src = window.URL.createObjectURL(curFiles[0])
-      console.log(image?.src)
-      framAddImage.style.background = "#E8F1F7"
-      showImage.src = image?.src
-      showImage.style.opacity = "1"
-      showSizeImage.textContent = returnFileSize(curFiles[0]?.size)
-      showSizeImage.style.color = "black"
-      showSizeImage.style.display = "block"
-      showIconAddImage.style.display = "none"
-      showButtonAddImage.style.display = "none"
-      showFormatAddImage.style.display = "none"
-      // backgroundModale.style.background = "black"
-      // buttonAddImageModale.value = "Valider"
-      // buttonAddImageModale.style.background = "#A7A7A7"
-      if (curFiles[0]?.size > 3002000) {
-        showImage.style.opacity = "0.5"
-        backgroundModale.style.background = "#B1663C"
-        buttonAddImageModale.value = "Image trop lourd"
-        buttonAddImageModale.setAttribute("class", "red-button")
-        // buttonAddImageModale.style.background = "red"
-        showSizeImage.style.color = "red"
-        showSizeImage.textContent = returnFileSize(curFiles[0]?.size) + ` / 4 Mo`
-        // buttonAddImageModale.setAttribute("class", "hide-button")
-      }
-      if (inputTitleImage.value === "" ) {
-        inputTitleImage.value = curFiles[0].name.replace('.png', '').replace('.jpg', '').replaceAll('-', ' ').replaceAll('_', ' ')
-      }
-      // // // // // // // // 
-      // const seeAddTitleImage = document.getElementById("file-name").value
-      // const seeAddFileImage = document.getElementById("add-image").value
-      // const clickForValidation = document.getElementById("btn-add-img")
-      // if (clickForValidation.addEventListener("click", () => {
-      //   console.log("Click for validation send image 1")
-      // })) {
-      //   // console.log("Click for validation send photo 2")
-      // } else {
-      //   if (seeAddFileImage !== "" && seeAddTitleImage !== "") {
-      //     buttonAddImageModale.setAttribute("class", "")
-      //     console.log("Tous les champs sont remplis")
-      //   }
-      //   else {
-      //     buttonAddImageModale.setAttribute("class", "hide-button")
-      //     console.log("Tous les champs ne sont pas remplis")
-      //   }
-      // }
-      // // // // // // // // // // 
-
-
-    }
-    else {
-      showImage.src = ""
-      showSizeImage.style.display = "none"
-      showSizeImage.textContent = " "
-      showIconAddImage.style.display = "block"
-      showButtonAddImage.style.display = "flex"
-      showFormatAddImage.style.display = "block"
-    }
-    console.log("image téléchargé")
-  }
-  else {    
-    console.log("Aucune image n'est chargée")
-  }
-})
-
-const listenSelectCategorie = document.getElementById("id-categories-choice")
-listenSelectCategorie.addEventListener("change", () => {
-  listenSelectCategorie.style.color= "inherit"
-})
-
-// Validation file size //
+// // //  Validation file SIZE & TYPE
 // const maxSize = 4000000;
 const maxSize = 3002000;
 function validFileType(files) {
@@ -254,33 +117,143 @@ function validFileSize(files) {
   }
   return valid
 }
+function returnFileSize(number) {
+  if (number < 1024) {
+    return number + " octets";
+  } else if (number >= 1024 && number < 1048576) {
+    return (number / 1024).toFixed(2) + " Ko";
+  } else if (number >= 1048576) {
+    return (number / 1048576).toFixed(2) + " Mo";
+  }
+}
 
+
+// // //  SELECTION CATTEGORIES GALLERY
+const datalistAddImage = document.getElementById("id-categories-choice")
+fetch(urlCategoriesAPI)
+.then(function (response) {
+  if (response.ok) {      
+    return response.json()
+    .then(function (json) {      
+        for (let pas = 0; pas < json.length; pas++) {
+        let createOption = document.createElement("option")     
+        createOption.innerHTML = `<option value="${json[pas].id}" id="option-category_0${json[pas].id}" class="option-category_${json[pas].name.replaceAll(' ', '-').replaceAll('&', '')}">${json[pas].name}</option>`
+        datalistAddImage.append(createOption)    
+        console.log(response.status)
+      }        
+    })
+  }
+  else {
+    console.log("Mauvaise réponse du réseau")
+    console.log(response.status)      
+  }
+})
+.catch(function (error) {
+  console.log("Il y a eu un problème avec l'opération fetch pour les catégories pour ajouter des images : " + error.message,)
+})
+
+// // // REFRESH FORM for ADD IMAGE
+const refreshFormAddImage = document.getElementById("image-form")
+refreshFormAddImage.addEventListener("change", () => {
+  const seeAddTitleImage = document.getElementById("file-name").value
+  const seeAddFileImage = InputImageFiles.value
+  const clickForValidation = document.getElementById("btn-add-img")
+  if (clickForValidation.addEventListener("click", () => {
+    console.log("Click for validation send image")
+  })) {
+  } else {
+    if (seeAddFileImage !== "" && seeAddTitleImage !== "" ) {
+      buttonAddImageModale.setAttribute("class", "")
+      // buttonAddImageModale.style.background = "#1D6154"
+      console.log("Tous les champs sont remplis")
+    }
+    else {
+      buttonAddImageModale.setAttribute("class", "hide-button")
+      // buttonAddImageModale.style.background = "#A7A7A7"
+      console.log("Tous les champs ne sont pas remplis")
+    }
+  }
+})
+refreshFormAddImage.addEventListener("change", () => {  
+  var curFiles = InputImageFiles.files
+  if (curFiles !== "") {
+    console.log(curFiles[0]?.name)
+    console.log(curFiles[0]?.size)
+    var image = document.createElement("img")
+    const framAddImage = document.querySelector(".frame-add-img")
+    const showIconAddImage = document.getElementById("icon-add-image")
+    const showButtonAddImage = document.getElementById("button-add-image")
+    const showFormatAddImage = document.getElementById("format-add-image")
+    const showImage = document.getElementById("show-img-download")
+    const showSizeImage = document.getElementById("show-size-img-download")
+    const inputTitleImage = document.getElementById("file-name")
+    buttonAddImageModale.value = "Valider"
+    backgroundModale.style.background = "black"
+    if (curFiles[0] !== undefined) {
+      image.src = window.URL.createObjectURL(curFiles[0])
+      console.log(image?.src)
+      framAddImage.style.background = "#E8F1F7"
+      showImage.src = image?.src
+      showImage.style.opacity = "1"
+      showSizeImage.textContent = returnFileSize(curFiles[0]?.size)
+      showSizeImage.style.color = "black"
+      showSizeImage.style.display = "block"
+      showIconAddImage.style.display = "none"
+      showButtonAddImage.style.display = "none"
+      showFormatAddImage.style.display = "none"
+      if (curFiles[0]?.size > 3002000) {
+        showImage.style.opacity = "0.5"
+        backgroundModale.style.background = "#B1663C"
+        buttonAddImageModale.value = "Image trop lourd"
+        buttonAddImageModale.setAttribute("class", "red-button")
+        showSizeImage.style.color = "red"
+        showSizeImage.textContent = returnFileSize(curFiles[0]?.size) + ` / 4 Mo`
+      }
+      if (inputTitleImage.value === "" ) {
+        inputTitleImage.value = curFiles[0].name.replace('.png', '').replace('.jpg', '').replaceAll('-', ' ').replaceAll('_', ' ')
+      }   
+    }
+    else {
+      showImage.src = ""
+      showSizeImage.style.display = "none"
+      showSizeImage.textContent = " "
+      showIconAddImage.style.display = "block"
+      showButtonAddImage.style.display = "flex"
+      showFormatAddImage.style.display = "block"
+    }
+    console.log("image téléchargé")
+  }
+  else {    
+    console.log("Aucune image n'est chargée")
+  }
+})
+
+// // // REFRESH Input/Select Categories
+inputCategory.addEventListener("change", () => {
+  inputCategory.style.color= "inherit"
+})
+
+
+// // // SEND NEW IMAGE // // //
+
+// // // fonction add image
 function addImage(token) {
   console.log("send Image API")
   const url = "http://localhost:5678/api/works"
   const inputFilesListe = document.getElementById("add-image")
   const inputTitle = document.getElementById("file-name")
-
   // // // // // // // // // 
-  const inputCategory = document.getElementById("id-categories-choice")
+  // const inputCategory = document.getElementById("id-categories-choice")
   console.log(inputCategory.value)
   
-  const inputCategorySelected = document.querySelector(`.option-category_${inputCategory.value.replaceAll(' ', '-').replaceAll('&', '')}`)
-  // console.log(inputCategorySelected.id)
-  // console.log(inputCategorySelected.id.replace('option-category_', ''))
-  // console.log(inputCategorySelected.value)
-  
+  const inputCategorySelected = document.querySelector(`.option-category_${inputCategory.value.replaceAll(' ', '-').replaceAll('&', '')}`)  
   
   const inputImageForm = document.getElementById("image-form")
   const onlyformdata = new FormData(inputImageForm);
   console.log("onlyformdata : ")
-  // console.log(onlyformdata)
   console.log(onlyformdata.get("category"))
   onlyformdata.set("category", `${inputCategorySelected.value}`)
   console.log(onlyformdata.get("category"))
-  // for (var value of onlyformdata.values()) {
-  //   console.log(value);
-  // }
   // // // // // // // //
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${token}`);
@@ -295,11 +268,6 @@ function addImage(token) {
     redirect: 'follow'
   };
   console.log("formdata : ")
-  // console.log(formdata)
-  // console.log(formdata.get("category"))
-  // for (var key of formdata.keys()) {
-    // console.log(key);
-  // }
   for (var value of formdata.values()) {
     console.log(value);
   }
@@ -313,60 +281,28 @@ function addImage(token) {
   // // // // // // // // // 
 }
 
-// fonction add image //
-async function addPhoto() {
-  console.log("executing add image")
-  const token = window.localStorage.getItem("token")
+async function CheckForAddImage() {
   console.log(token)
   const addPhotoInput = document.getElementById("add-image")
-  const titleInput = document.getElementById("file-name")
-  const categoryInput = document.getElementById("id-categories-choice")
   const files = addPhotoInput.files
-  console.log(files)
   const imageForm = document.getElementById("image-form")
-  validFileSize(files)
-  validFileType(files)
   if (imageForm.reportValidity() && validFileType(files) && validFileSize(files)) {
     addImage(token)
     closeModale()
     } else {
-    if (files.length === 0) {
-        console.log("No file")
-        alert("Absence de fichier!")
-    } else if (!validFileType(files)) {
-        console.log("File format is not ok")
-        alert("Erreur: format de l'image non valide.")
-    } else if (!validFileSize(files)) {
-        console.log("File size too big")
-        alert("Erreur: la taille de l'image est trop grande.")
-    } else if (!titleInput.validity.valid) {
-        console.log("not title")
-        alert("Erreur: Le titre doit être renseigné.")
-    } else if (!categoryInput.validity.valid) {
-        console.log("not catégories")
-        alert("Erreur: La catégorie doit être renseignée.")
-      return
-    }
+    console.log("Error CheckForAddImage")
   }
 }
 const sendNewImage = document.getElementById("btn-add-img")
 sendNewImage.addEventListener("click", (e) => {
   console.log("Click for send new image")
   e.preventDefault()
-  addPhoto()
+  CheckForAddImage()
     .then(console.log("OK"))
     .catch(error => console.log(error))
 })
 
-function returnFileSize(number) {
-  if (number < 1024) {
-    return number + " octets";
-  } else if (number >= 1024 && number < 1048576) {
-    return (number / 1024).toFixed(2) + " Ko";
-  } else if (number >= 1048576) {
-    return (number / 1048576).toFixed(2) + " Mo";
-  }
-}
+
 
 
 
