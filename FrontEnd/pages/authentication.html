@@ -28,16 +28,19 @@
 		<section id="authentication">
 			<h2>Log In</i></h2>
 			<form action="#" method="post">
-				<label for="email">Email</label>
+				<label for="email" id="title-identifier">Email</label>
 				<input type="email" name="email" id="email-id" placeholder="votre.adresse@email.fr" required>
-				<label for="password" class="password-icon">Mot de passe
+				<label for="password" id="title-password">Mot de passe</label>
+				<div id="input-password">
 					<input type="password" name="password" id="password-id" autocomplete="current-password" minlength="6" maxlength="18" size="18" placeholder="m0t_2-CQr¡T" title="Entre 6 et 18 caractères." required>
-					<div class="password-icon">
-						<span class="material-symbols-outlined icon-eye-off">visibility_off</span>
-						<span class="material-symbols-outlined icon-eye">visibility</span>
-					</div>
-				</label>
-				<input type="submit" value="Se connecter" class="to-login-btn">
+					<button id="eyes" type="button" class="password-icon" >
+						<span id="eye-off" class="material-symbols-outlined icon-eye-off">visibility_off</span>
+					<!-- </button>
+					<button id="eye-on" class="password-icon"> -->
+						<span id="eye-on" class="material-symbols-outlined icon-eye">visibility</span>
+					</button>
+				</div>	
+				<input type="submit" value="Se connecter" id="to-login-btn">
 			</form>
 			<div id="forgotpassword"><a href="#">Mot de passe oublié</a></div>			
 		</section>

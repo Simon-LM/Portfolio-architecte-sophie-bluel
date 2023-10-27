@@ -1,5 +1,34 @@
 console.log("Page JAvaScripte | MODALE")
 
+// LOGOUT // 
+const editingBar = document.querySelector("#editing-bar")
+const editMode = document.querySelector(".edit-in-out")
+const logInOrOut = document.querySelector(".log-in-out")
+const token = window.localStorage.getItem("token")
+
+if (token === null) {
+    editingBar.style.display = "none"
+    editMode.style.visibility = "hidden"
+    logInOrOut.textContent = "login"
+    logInOrOut.setAttribute("href", "./pages/authentication.html")
+    console.log('token :' + token)
+}
+if (token !== null) {
+    editingBar.style.display = "flex"
+    editMode.style.visibility = "visible"
+    logInOrOut.textContent = "logout"
+    logInOrOut.setAttribute("href", "./index.html")
+    console.log('token :' + token)
+    logInOrOut.addEventListener("click", () => {
+        console.log("click on LOGOUT")
+        localStorage.clear()
+        console.log('token :' + token)
+        logInOrOut.textContent = "login"        
+    })
+}
+
+
+
 const backgroundModale = document.querySelector("#background-modale")
 backgroundModale.style.display = "none" 
 const modale = document.querySelector("#modale")
@@ -89,6 +118,8 @@ fetch(urlCategoriesAPI)
 
 // const listenAddTitleImage = document.querySelector(".add-img-modale")
 const listenAddTitleImage = document.getElementById("image-form")
+// let imageDownload = document.getElementById("add-image")
+// let curFiles = imageDownload.files
 listenAddTitleImage.addEventListener("change", () => {
   const seeAddTitleImage = document.getElementById("file-name").value
   const seeAddFileImage = document.getElementById("add-image").value
@@ -98,12 +129,14 @@ listenAddTitleImage.addEventListener("change", () => {
   })) {
     // console.log("Click for validation send photo 2")
   } else {
-    if (seeAddFileImage !== "" && seeAddTitleImage !== "") {
+    if (seeAddFileImage !== "" && seeAddTitleImage !== "" ) {
       buttonAddImageModale.setAttribute("class", "")
+      // buttonAddImageModale.style.background = "#1D6154"
       console.log("Tous les champs sont remplis")
     }
     else {
       buttonAddImageModale.setAttribute("class", "hide-button")
+      // buttonAddImageModale.style.background = "#A7A7A7"
       console.log("Tous les champs ne sont pas remplis")
     }
   }
@@ -111,31 +144,78 @@ listenAddTitleImage.addEventListener("change", () => {
 listenAddTitleImage.addEventListener("change", () => {  
   const seeAddFileImage = document.getElementById("add-image").files
   if (seeAddFileImage !== "") {
-    let imageDownload = document.getElementById("add-image")
+    const imageDownload = document.getElementById("add-image")
     var curFiles = imageDownload.files
     console.log(curFiles)
     console.log(curFiles[0])
     console.log(curFiles[0]?.name)
     console.log(curFiles[0]?.size)
     var image = document.createElement("img")
+    const framAddImage = document.querySelector(".frame-add-img")
     const showIconAddImage = document.getElementById("icon-add-image")
     const showButtonAddImage = document.getElementById("button-add-image")
     const showFormatAddImage = document.getElementById("format-add-image")
     const showImage = document.getElementById("show-img-download")
+    const showSizeImage = document.getElementById("show-size-img-download")
     const inputTitleImage = document.getElementById("file-name")
+    // const showErrorMessage = document.querySelector(".line-modale")
+    buttonAddImageModale.value = "Valider"
+    // buttonAddImageModale.setAttribute("class", "hide-button")
+    backgroundModale.style.background = "black"
     if (curFiles[0] !== undefined) {
       image.src = window.URL.createObjectURL(curFiles[0])
       console.log(image?.src)
+      framAddImage.style.background = "#E8F1F7"
       showImage.src = image?.src
+      showImage.style.opacity = "1"
+      showSizeImage.textContent = returnFileSize(curFiles[0]?.size)
+      showSizeImage.style.color = "black"
+      showSizeImage.style.display = "block"
       showIconAddImage.style.display = "none"
       showButtonAddImage.style.display = "none"
       showFormatAddImage.style.display = "none"
+      // backgroundModale.style.background = "black"
+      // buttonAddImageModale.value = "Valider"
+      // buttonAddImageModale.style.background = "#A7A7A7"
+      if (curFiles[0]?.size > 3002000) {
+        showImage.style.opacity = "0.5"
+        backgroundModale.style.background = "#B1663C"
+        buttonAddImageModale.value = "Image trop lourd"
+        buttonAddImageModale.setAttribute("class", "red-button")
+        // buttonAddImageModale.style.background = "red"
+        showSizeImage.style.color = "red"
+        showSizeImage.textContent = returnFileSize(curFiles[0]?.size) + ` / 4 Mo`
+        // buttonAddImageModale.setAttribute("class", "hide-button")
+      }
       if (inputTitleImage.value === "" ) {
         inputTitleImage.value = curFiles[0].name.replace('.png', '').replace('.jpg', '').replaceAll('-', ' ').replaceAll('_', ' ')
       }
+      // // // // // // // // 
+      // const seeAddTitleImage = document.getElementById("file-name").value
+      // const seeAddFileImage = document.getElementById("add-image").value
+      // const clickForValidation = document.getElementById("btn-add-img")
+      // if (clickForValidation.addEventListener("click", () => {
+      //   console.log("Click for validation send image 1")
+      // })) {
+      //   // console.log("Click for validation send photo 2")
+      // } else {
+      //   if (seeAddFileImage !== "" && seeAddTitleImage !== "") {
+      //     buttonAddImageModale.setAttribute("class", "")
+      //     console.log("Tous les champs sont remplis")
+      //   }
+      //   else {
+      //     buttonAddImageModale.setAttribute("class", "hide-button")
+      //     console.log("Tous les champs ne sont pas remplis")
+      //   }
+      // }
+      // // // // // // // // // // 
+
+
     }
     else {
       showImage.src = ""
+      showSizeImage.style.display = "none"
+      showSizeImage.textContent = " "
       showIconAddImage.style.display = "block"
       showButtonAddImage.style.display = "flex"
       showFormatAddImage.style.display = "block"
@@ -153,7 +233,8 @@ listenSelectCategorie.addEventListener("change", () => {
 })
 
 // Validation file size //
-const maxSize = 4000000;
+// const maxSize = 4000000;
+const maxSize = 3002000;
 function validFileType(files) {
   const fileTypes = ["image/jpeg", "image/png"];
   let valid = true
@@ -277,18 +358,15 @@ sendNewImage.addEventListener("click", (e) => {
     .catch(error => console.log(error))
 })
 
-
-// // // // // // // // // 
-
-// function returnFileSize(number) {
-//   if (number < 1024) {
-//     return number + " octets";
-//   } else if (number >= 1024 && number < 1048576) {
-//     return (number / 1024).toFixed(1) + " Ko";
-//   } else if (number >= 1048576) {
-//     return (number / 1048576).toFixed(1) + " Mo";
-//   }
-// }
+function returnFileSize(number) {
+  if (number < 1024) {
+    return number + " octets";
+  } else if (number >= 1024 && number < 1048576) {
+    return (number / 1024).toFixed(2) + " Ko";
+  } else if (number >= 1048576) {
+    return (number / 1048576).toFixed(2) + " Mo";
+  }
+}
 
 
 

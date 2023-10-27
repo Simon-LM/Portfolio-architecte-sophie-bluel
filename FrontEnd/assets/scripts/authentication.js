@@ -1,21 +1,24 @@
 console.log("Page JAvaScripte | AUTHENTICATION")
 
-// const logInOrOut = document.querySelector(".log-in-out")
 // Password visibility ON/OFF //
-const eye = document.querySelector(".icon-eye");
-const eyeoff = document.querySelector(".icon-eye-off");
+const eyes = document.getElementById("eyes");
+const eyeOn = document.getElementById("eye-on");
+const eyeOff = document.getElementById("eye-off");
 const passwordField = document.querySelector("input[type=password]");
-eyeoff.addEventListener("click", () => {
-    eyeoff.style.display = "none";
-    eye.style.display = "block";
-    passwordField.type = "text";
-    console.log("Click to make the password visible")
-});
-eye.addEventListener("click", () => {
-    eye.style.display = "none";
-    eyeoff.style.display = "block";
-    passwordField.type = "password";
-    console.log("Click for hidden the password")
+const showErrorIdentifier = document.getElementById("title-identifier");
+const showErrorPassword = document.getElementById("title-password");
+eyes.addEventListener("click", () => {
+    if (passwordField.type !== "text") {
+        eyeOff.style.display = "none";
+        eyeOn.style.display = "block";
+        passwordField.type = "text";
+        console.log("Click to make the password visible") 
+    } else {
+        eyeOn.style.display = "none";
+        eyeOff.style.display = "block";
+        passwordField.type = "password";
+        console.log("Click for hidden the password")
+    }
 });
 
 // Log IN or OUT // 
@@ -24,7 +27,7 @@ const token = window.localStorage.getItem("token")
     let submit = document.querySelector("#authentication")
     submit.addEventListener("submit", function (event) {
         console.log("click on submit")
-        event.preventDefault()  // Désactivation du comportement par défaut du navigateur
+        event.preventDefault()
         const login = {
             email: document.getElementById("email-id").value,
             password: document.getElementById("password-id").value,
@@ -39,21 +42,23 @@ const token = window.localStorage.getItem("token")
             .then((responseAPI) => {
                 if (!responseAPI.ok) {
                     if (responseAPI.status === 404) {
-                        alert("Adresse email ou identifiant incorrect")
+                        showErrorIdentifier.textContent = "Adresse email ou identifiant incorrect"
+                        showErrorIdentifier.style.color = "red"
                         console.log(responseAPI.status)
                         console.log("Adresse email ou identifiant incorrect")
+                        if (responseAPI.status !== 401) {
+                            showErrorPassword.style.color = "black"
+                        }
                         return
                     }
                     if (responseAPI.status === 401) {
-                        alert("Mot de passe incorrect")
+                        showErrorPassword.textContent = "Mot de passe incorrect"
+                        showErrorPassword.style.color = "red"
                         console.log(responseAPI.status)
                         console.log("Mot de passe incorrect")
-                        return
-                    }
-                    else {
-                        alert("Adresse email ou mot de passe non valide")
-                        console.log(responseAPI.status)
-                        console.log("Adresse email ou mot de passe non valide")
+                        if (responseAPI.status !== 404) {
+                            showErrorIdentifier.style.color = "black"
+                        }
                         return
                     }
                 }
@@ -65,7 +70,6 @@ const token = window.localStorage.getItem("token")
                                 console.log(responseAPI.status)
                             }
                             if (jsonResponseAPI.token) {
-                                // const token = JSON.stringify(jsonResponseAPI.token)
                                 const token = jsonResponseAPI.token
                                 console.log(responseAPI.status)
                                 console.log(token)

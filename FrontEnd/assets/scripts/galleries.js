@@ -52,7 +52,7 @@ fetch(urlCategoriesAPI)
       console.log(json)
       for (let pas = 0; pas < json.length; pas++) {   
         let createDiv = document.createElement("div")
-        createDiv.innerHTML = `<div id="filter_0${json[pas].id}" class="button">${json[pas].name}</div>`
+        createDiv.innerHTML = `<button id="filter_0${json[pas].id}" class="button">${json[pas].name}</button>`
         filtersLocationHTML.append(createDiv)
         console.log(response.ok)
         console.log(response.status)
