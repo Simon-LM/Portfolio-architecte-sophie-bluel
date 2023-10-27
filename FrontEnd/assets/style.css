@@ -385,7 +385,7 @@ footer nav ul {
 	margin-top: -3rem;
 }
 #background-modale:hover {
-	cursor: move;
+	cursor: pointer;
 }
 #modale {
 	/* 1140px */
