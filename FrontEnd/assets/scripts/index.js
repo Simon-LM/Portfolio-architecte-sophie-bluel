@@ -119,7 +119,6 @@ function galleryModale(filterCategoriesSelectedModale) {
       return response.json()
       .then(function (json) {
         for (let pas = 0; pas < json.length; pas++) {   
-          // var hideImageOnTrash = document.getElementById(`img_00${json[pas].id}`)
           let createFigure = document.createElement("figure")
           createFigure.innerHTML = `<button id="btn-trash" class="img_${json[pas].id}"><i class="fa-solid fa-trash-can" alt="Poubelle" title="Supprimer : ${json[pas].title}"></i></button><img src="${json[pas].imageUrl}" alt="${json[pas].title}" title="${json[pas].title}" id="img_00${json[pas].id}">`          
           console.log(`GalleryArray ID : ${pas}`)
@@ -131,8 +130,7 @@ function galleryModale(filterCategoriesSelectedModale) {
             galleryOnModale.append(createFigure) 
             console.log(`categories selected : ${filterCategoriesSelectedModale}`)
           }
-          console.log(response.status)
-        
+          console.log(response.status)        
         }  
         trashListener()
       })      
@@ -146,8 +144,7 @@ function galleryModale(filterCategoriesSelectedModale) {
     console.log("Il y a eu un problème avec l'opération fetch : " + error.message,)
   })
 }
-galleryModale(0)
-
+// galleryModale(0)
 function trashListener() { 
   let trashs = document.querySelectorAll(`#btn-trash`)
   console.log(`trash :` + trashs.length)
@@ -179,6 +176,7 @@ function trashListener() {
         .then(function (response) { 
           if (response.ok) {
             console.log(response.status)
+            refreshMainGallery()
           }
           if (!response.ok) { 
             console.log(response.status)
@@ -187,7 +185,22 @@ function trashListener() {
     })
   })
 }
-
+function refreshMainGallery() {
+  // galleryMain(1)
+  galleryLocationHTML.replaceChildren()
+  galleryMain(0)
+  // if (filterCategoriesSelected !== "0") {
+  //   galleryLocationHTML.replaceChildren()
+  //   galleryMain(0)
+  //   galleryLocationHTML.replaceChildren()
+  //   galleryMain(filterCategoriesSelected)
+  // } else {
+  //   galleryLocationHTML.replaceChildren()
+  //   galleryMain(filterCategoriesSelected)
+  //   galleryLocationHTML.replaceChildren()
+  //   galleryMain(0)
+  // }
+}
 // // //  MODALE // // //
 const titleModale = document.getElementById("title-modale")
 const validationButtonModale = document.getElementById("btn-modale--validation")
@@ -199,6 +212,11 @@ const inputImageFiles = document.getElementById("add-image")
 const currentFiles = inputImageFiles.files
 const inputImageName = document.getElementById("file-name")
 const inputCategory = document.getElementById("id-categories-choice")
+const showIconAddImage = document.getElementById("icon-add-image")
+const showButtonAddImage = document.getElementById("button-add-image")
+const showFormatAddImage = document.getElementById("format-add-image")
+const showImage = document.getElementById("show-img-download")
+const showSizeImage = document.getElementById("show-size-img-download")
 
 // // //  HIDE MODALE
 const backgroundModale = document.getElementById("background-modale")
@@ -208,11 +226,14 @@ modale.style.display = "none"
 // // // SHOW MODALE
 const openModale = document.querySelectorAll(".fa-pen-to-square, .edit")
 openModale.forEach(element => {
-    element.addEventListener("click", () => {
-        backgroundModale.style.display = "block"
-        modale.style.display = "block"
-        console.log("Click for OPEN the MODALE")
-    })
+  element.addEventListener("click", () => {
+      backgroundModale.style.display = "block"
+      modale.style.display = "block"
+    console.log("Click for OPEN the MODALE")
+    galleryModaleVisibility.replaceChildren()
+    galleryModale(0)
+  })
+  // galleryModale(0)
 })
 // // // CLOSE MODALE
 const crossModale = document.querySelectorAll("#modale-close, #background-modale")
@@ -220,13 +241,17 @@ function closeModale(){
   backgroundModale.style.display = "none"
   modale.style.display = "none"
   console.log("Click for CLOSE the MODALE")
+  // let filterCategoriesSelectedModale = 0
+  
+  // refreshMainGallery()
   // galleryMain(0)
-  window.location = "../index.html"
+  // window.location = "../index.html"
 }
 crossModale.forEach(element => {
-    element.addEventListener("click", () => {
-      closeModale()
-    })
+  element.addEventListener("click", () => {
+    // refreshMainGallery()
+    closeModale()
+  })
 })
 
 // // //  ARROW BACK
@@ -343,11 +368,11 @@ formAddImage.addEventListener("change", () => {
     console.log(curFiles[0]?.size)
     var image = document.createElement("img")
     const framAddImage = document.querySelector(".frame-add-img")
-    const showIconAddImage = document.getElementById("icon-add-image")
-    const showButtonAddImage = document.getElementById("button-add-image")
-    const showFormatAddImage = document.getElementById("format-add-image")
-    const showImage = document.getElementById("show-img-download")
-    const showSizeImage = document.getElementById("show-size-img-download")
+    // const showIconAddImage = document.getElementById("icon-add-image")
+    // const showButtonAddImage = document.getElementById("button-add-image")
+    // const showFormatAddImage = document.getElementById("format-add-image")
+    // const showImage = document.getElementById("show-img-download")
+    // const showSizeImage = document.getElementById("show-size-img-download")
     buttonAddImage.value = "Valider"
     backgroundModale.style.background = "black"
     if (curFiles[0] !== undefined) {
@@ -399,7 +424,6 @@ formAddImage.addEventListener("change", () => {
 inputCategory.addEventListener("change", () => {
   inputCategory.style.color= "inherit"
 })
-
 // // // SEND NEW IMAGE // // //
 buttonAddImage.addEventListener("click", (e) => {
   var cFiles = inputImageFiles.files
@@ -413,12 +437,15 @@ buttonAddImage.addEventListener("click", (e) => {
     CheckForAddImage()
       .then(console.log("Check for AddImage : OK"))
       .catch(error => console.log(error))
+    // refreshMainGallery()
   }
 })
 async function CheckForAddImage() {
   if (formAddImage.reportValidity() && validFileType(currentFiles) && validFileSize(currentFiles)) {
     addImage(token)
     closeModale()
+    refreshMainGallery()
+    window.location = "../index.html"
     } else {
     console.log("Error Check for AddImage")
   }
@@ -452,4 +479,13 @@ function addImage(token) {
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('Error :' + error))
+    
+  inputImageFiles.value = ""
+  inputImageName.value = ""
+  inputCategory.value = ""
+  showImage.src = ""
+  showSizeImage.style.display = "none"
+  showIconAddImage.style.display = "block"
+  showButtonAddImage.style.display = "block"
+  showFormatAddImage.style.display = "block"
 }
