@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/9f8122b2b5.js" crossorigin="anonymous"></script>
 	<script src="./assets/scripts/index.js" async></script>
+	<script src="./assets/scripts/carousel.js" async></script>
 </head>
 <body>
 	<section id="edition">
@@ -19,7 +20,7 @@
 			<i class="fa-regular fa-pen-to-square"></i>
 			Mode édition
 		</div>
-		<div id="background-modale"></div>
+		<div id="background-modale" title="Cliquez pour fermer"></div>
 		<div id="modale">
 			<div class="modale__header">
 				<button id="modale-arrow-back"><span class="material-symbols-outlined">arrow_back</span></button>
@@ -63,7 +64,7 @@
 			<li><a href="#portfolio"> projets</a></li>
 			<li><a href="#contact">contact</a></li>
 			<li><a href="./pages/authentication.html" class="log-in-out">login</a></li>
-			<li><a href="https://www.instagram.com/sophiebluel" target="_blank" rel="noreferrer, noopener"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
+			<li><a href="https://www.instagram.com/sophiebluel" target="_blank" rel="noreferrer, noopener" class="glyph-instagram"><img src="./assets/icons/instagram-glyph-black.svg" alt="Instagram" class="glyph-instagram-black"><img src="./assets/icons/instagram-glyph-green.svg" alt="Instagram" class="glyph-instagram-green"></a></li>
 		</ul>
 	</nav>
 </header>
@@ -95,6 +96,13 @@
 			<button id="filter_00" class="Selected_Filter button">Tous</button>
 		</div>
 		<div class="gallery"></div>
+		<div id="carousel-background"></div>
+		<div id="carousel">
+			<a class="arrow arrow_left"><img src="./assets/icons/arrow_left.png" alt="Défiler vers la gauche"></a>
+			<a class="arrow arrow_right"><img src="./assets/icons/arrow_right.png" alt="Défiler vers la droite"></a>
+			<div id="dots"></div>
+			<img id="img-carousel" src="" alt="">
+		</div>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>

@@ -39,17 +39,39 @@ function galleryMain(filterCategoriesSelected) {
     if (response.ok) {
       return response.json()
         .then(function (json) {
-        for (let pas = 0; pas < json.length; pas++) {
-          let createFigure = document.createElement("figure")
-          createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
-          let categoryId = json[pas].categoryId
-          if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
+          for (let pas = 0; pas < json.length; pas++) {
+            let createFigure = document.createElement("figure")
+            createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
+            let categoryId = json[pas].categoryId
+            if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
+            }
+            else {
+              galleryLocationHTML.append(createFigure)
+            }
+            console.log(response.status)
           }
-          else {
-            galleryLocationHTML.append(createFigure)
-          }
-          console.log(response.status)
-        }
+          // // // CAROUSEL
+          for (let pas = 0; pas < json.length; pas++) {
+            let selectedImage = document.querySelector(`.img_${json[pas].id}`)
+            let carouselVisible = document.getElementById("carousel")
+            let imageCarousel = document.getElementById("img-carousel")
+            carouselVisible.style.display = "none"
+            // // // CLICK ON IMAGE
+            selectedImage.addEventListener("click", function () {
+              console.log(`click on img_${json[pas].id}`)
+              carouselVisible.style.display = "flex"
+              backgroundModale.style.display = "block"
+              imageCarousel.src = `${json[pas].imageUrl}`
+              imageCarousel.alt = `${json[pas].title}`
+            })           
+            backgroundModale.addEventListener("click", function () {
+              console.log(`click out carousel`)
+              backgroundModale.style.display = "none"
+              carouselVisible.style.display = "none"
+              carouselVisible.src = ''
+              carouselVisible.alt = ''              
+            })
+          }         
       })
     }
     else {
@@ -108,8 +130,6 @@ fetch(urlCategoriesAPI)
 })
 
 // // //  GALLERY MODALE // // //
-
-// SHOW GALLERY ON MODALE//
 let filterCategoriesSelectedModale = 0
 const galleryOnModale = document.querySelector('.gallery-modale')
 function galleryModale(filterCategoriesSelectedModale) {
@@ -186,20 +206,8 @@ function trashListener() {
   })
 }
 function refreshMainGallery() {
-  // galleryMain(1)
   galleryLocationHTML.replaceChildren()
   galleryMain(0)
-  // if (filterCategoriesSelected !== "0") {
-  //   galleryLocationHTML.replaceChildren()
-  //   galleryMain(0)
-  //   galleryLocationHTML.replaceChildren()
-  //   galleryMain(filterCategoriesSelected)
-  // } else {
-  //   galleryLocationHTML.replaceChildren()
-  //   galleryMain(filterCategoriesSelected)
-  //   galleryLocationHTML.replaceChildren()
-  //   galleryMain(0)
-  // }
 }
 // // //  MODALE // // //
 const titleModale = document.getElementById("title-modale")
@@ -351,12 +359,10 @@ formAddImage.addEventListener("change", () => {
   } else {
     if (seeAddFileImage !== "" && seeAddTitleImage !== "" ) {
       buttonAddImage.setAttribute("class", "")
-      // buttonAddImage.style.background = "#1D6154"
       console.log("Tous les champs sont remplis")
     }
     else {
       buttonAddImage.setAttribute("class", "hide-button")
-      // buttonAddImage.style.background = "#A7A7A7"
       console.log("Tous les champs ne sont pas remplis")
     }
   }
@@ -368,11 +374,6 @@ formAddImage.addEventListener("change", () => {
     console.log(curFiles[0]?.size)
     var image = document.createElement("img")
     const framAddImage = document.querySelector(".frame-add-img")
-    // const showIconAddImage = document.getElementById("icon-add-image")
-    // const showButtonAddImage = document.getElementById("button-add-image")
-    // const showFormatAddImage = document.getElementById("format-add-image")
-    // const showImage = document.getElementById("show-img-download")
-    // const showSizeImage = document.getElementById("show-size-img-download")
     buttonAddImage.value = "Valider"
     backgroundModale.style.background = "black"
     if (curFiles[0] !== undefined) {

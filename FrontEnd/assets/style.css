@@ -377,7 +377,7 @@ footer nav ul {
 	display: none;
 	position: fixed;
 	z-index: 2;
-	height: 100vh;
+	height: 105vh;
 	width: 100vw;
 	max-width: 1140px;
 	background: var(--main-less-contrast-color);
@@ -643,6 +643,89 @@ option {
 	padding: 0.25em 0.5em;
 	border-radius: 0.5em;
 }
-/* #format-add-image {
-	margin-bottom: -1.5rem;	
-} */
+
+/* Logo INSTAGRAM */
+.glyph-instagram .glyph-instagram-black {
+	display: block;
+	justify-content: center;
+	align-items: center;
+	height: 1.5rem;
+}
+.glyph-instagram:hover .glyph-instagram-black {
+	display: none;
+}
+.glyph-instagram .glyph-instagram-green {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	height: 1.5rem;
+}
+.glyph-instagram:hover .glyph-instagram-green {
+	display: block;
+}
+
+
+/* CAROUSEL */
+#carousel {
+	--modale-size: clamp(30vmin, 45rem, 80vmin);
+	position: fixed;
+	z-index: 3;
+	top: calc((100vh - var(--modale-size)) / 4);
+	right: calc((100% - var(--modale-size)) / 2);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: var(--modale-size);
+	background: var(--main-bg-color);
+	border-radius: 1rem;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 1rem;
+}
+#img-carousel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--modale-size);
+	border-radius: 1rem;
+}
+
+.gallery figure {
+	cursor: pointer;
+}
+
+/* Gestion des points du carrousel */
+#dots {
+	position: absolute;
+	bottom: 2rem;
+	display: flex;
+}
+
+.dot {
+	margin-inline: 0.33rem;
+	width: 1rem;
+	height: 1rem;
+	background-color: #ffffff00;
+	border: 3px solid #fff;
+	border-radius: 100%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
+}
+.dot:hover {
+	opacity: 0.75;
+}
+.dot_selected {
+	background-color: #fff;	
+}
+
+#carousel .arrow {
+	position: absolute;
+}
+#carousel .arrow:hover {
+	opacity: 0.75;
+}
+#carousel .arrow_left {
+	left: 1.5rem;
+}
+#carousel .arrow_right {
+	right: 1.5rem;
+}
