@@ -7,33 +7,32 @@ const logInOrOut = document.querySelector(".log-in-out")
 const token = window.localStorage.getItem("token")
 
 if (token === null) {
-    editingBar.style.display = "none"
-    editMode.style.visibility = "hidden"
-    logInOrOut.textContent = "login"
-    logInOrOut.setAttribute("href", "./pages/authentication.html")
+  editingBar.style.display = "none"
+  editMode.style.visibility = "hidden"
+  logInOrOut.textContent = "login"
+  logInOrOut.setAttribute("href", "./pages/authentication.html")
+  console.log('token :' + token)
+} else {
+  editingBar.style.display = "flex"
+  editMode.style.visibility = "visible"
+  logInOrOut.textContent = "logout"
+  logInOrOut.setAttribute("href", "./index.html")
+  console.log('token :' + token)
+  logInOrOut.addEventListener("click", () => {
+    console.log("click on LOGOUT")
+    localStorage.clear()
     console.log('token :' + token)
-}
-if (token !== null) {
-    editingBar.style.display = "flex"
-    editMode.style.visibility = "visible"
-    logInOrOut.textContent = "logout"
-    logInOrOut.setAttribute("href", "./index.html")
-    console.log('token :' + token)
-    logInOrOut.addEventListener("click", () => {
-        console.log("click on LOGOUT")
-        localStorage.clear()
-        console.log('token :' + token)
-        logInOrOut.textContent = "login"        
-    })
+    logInOrOut.textContent = "login"        
+  })
 }
 
 // GALLERY & FILTERS // 
 const urlGalleryAPI = "http://localhost:5678/api/works"
 const urlCategoriesAPI = "http://localhost:5678/api/categories"
 let filterCategoriesSelected = 0
-// // // SHOW GALLERY
+// // // DISPALY GALLERY
 const galleryLocationHTML = document.querySelector('.gallery')
-function galleryMain(filterCategoriesSelected) {
+function displayMainGallery(filterCategoriesSelected) {
   fetch(urlGalleryAPI)
   .then(function (response) {
     if (response.ok) {
@@ -41,9 +40,10 @@ function galleryMain(filterCategoriesSelected) {
         .then(function (json) {
           for (let pas = 0; pas < json.length; pas++) {
             let createFigure = document.createElement("figure")
-            createFigure.innerHTML = `<img src="${json[pas].imageUrl}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
+            createFigure.innerHTML = `<img src="${json[pas].imageUrl}" id="img-carousel-ID_${pas}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
             let categoryId = json[pas].categoryId
             if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
+              // // // // // // // //  CLEAN 
             }
             else {
               galleryLocationHTML.append(createFigure)
@@ -52,24 +52,32 @@ function galleryMain(filterCategoriesSelected) {
           }
           // // // CAROUSEL
           for (let pas = 0; pas < json.length; pas++) {
-            let selectedImage = document.querySelector(`.img_${json[pas].id}`)
+            let selectedImage = document.querySelector(`#img-carousel-ID_${pas}`)
             let carouselVisible = document.getElementById("carousel")
             let imageCarousel = document.getElementById("img-carousel")
             carouselVisible.style.display = "none"
+            const imageNameCarousel = document.getElementById("img-name-carousel")
+            const closeCarousel = document.getElementById("carousel-close")
             // // // CLICK ON IMAGE
             selectedImage.addEventListener("click", function () {
-              console.log(`click on img_${json[pas].id}`)
+              imageCarousel.className = `img-carousel-ID_${pas}`
               carouselVisible.style.display = "flex"
               backgroundModale.style.display = "block"
               imageCarousel.src = `${json[pas].imageUrl}`
               imageCarousel.alt = `${json[pas].title}`
-            })           
-            backgroundModale.addEventListener("click", function () {
-              console.log(`click out carousel`)
+				      imageNameCarousel.textContent =  json[pas].title
+            }) 
+            function clickToCloseTheCarousel() {              
               backgroundModale.style.display = "none"
               carouselVisible.style.display = "none"
               carouselVisible.src = ''
-              carouselVisible.alt = ''              
+              carouselVisible.alt = '' 
+            }
+            backgroundModale.addEventListener("click", function () {
+              clickToCloseTheCarousel()             
+            })
+            closeCarousel.addEventListener("click", function () {
+              clickToCloseTheCarousel()         
             })
           }         
       })
@@ -83,7 +91,7 @@ function galleryMain(filterCategoriesSelected) {
     console.log("Il y a eu un problème avec l'opération fetch : " + error.message)
   })
 }
-galleryMain(filterCategoriesSelected)
+displayMainGallery(filterCategoriesSelected)
 
 // // // BUTTONS FILTRES
 const filtersLocationHTML = document.getElementById('filters')
@@ -93,9 +101,9 @@ fetch(urlCategoriesAPI)
     return response.json()
     .then(function (json) {
       for (let pas = 0; pas < json.length; pas++) {   
-        let createDiv = document.createElement("div")
-        createDiv.innerHTML = `<button id="filter_0${json[pas].id}" class="button">${json[pas].name}</button>`
-        filtersLocationHTML.append(createDiv)
+        let createdDiv = document.createElement("div")
+        createdDiv.innerHTML = `<button id="filter_0${json[pas].id}" class="button">${json[pas].name}</button>`
+        filtersLocationHTML.append(createdDiv)
         console.log(response.status)
       }
       // // // LISTEN FILTERS BUTTONS          
@@ -103,17 +111,17 @@ fetch(urlCategoriesAPI)
         let selectedButtonsFilter = document.getElementById(`filter_0${pas}`)
       // // // CLICK ON BUTTON
         selectedButtonsFilter.addEventListener("click", function () {
-        console.log(`click on filter_0${pas}`)
-        // // // WRITE SELECTED FILTER ON HTML
+          console.log(`click on filter_0${pas}`)
+          // // // WRITE SELECTED FILTER ON HTML
           if (`filter_0${pas}` !== `filter_00`) {
             galleryLocationHTML.replaceChildren()
-            galleryMain(pas)
+            displayMainGallery(pas)
             console.log(`filterCategoriesSelected : ${pas}`)
           }
           else {
             let filterCategoriesSelected = 0
             galleryLocationHTML.replaceChildren()
-            galleryMain(filterCategoriesSelected)
+            displayMainGallery(filterCategoriesSelected)
             console.log(`filter_0${pas}`)
           }        
         })
@@ -207,7 +215,7 @@ function trashListener() {
 }
 function refreshMainGallery() {
   galleryLocationHTML.replaceChildren()
-  galleryMain(0)
+  displayMainGallery(0)
 }
 // // //  MODALE // // //
 const titleModale = document.getElementById("title-modale")
@@ -252,7 +260,7 @@ function closeModale(){
   // let filterCategoriesSelectedModale = 0
   
   // refreshMainGallery()
-  // galleryMain(0)
+  // displayMainGallery(0)
   // window.location = "../index.html"
 }
 crossModale.forEach(element => {

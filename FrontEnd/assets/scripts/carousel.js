@@ -1,4 +1,5 @@
 console.log("CAROUSEL");
+// const selectedImage = document.getElementById(`img-carousel`)	
 
 
 const urlCarouselAPI = "http://localhost:5678/api/works"
@@ -9,163 +10,73 @@ fetch(urlCarouselAPI)
 			.then(function (json) {
 				slides = json
 				console.log(slides)
-			
+				// Number of images
+				// slides.length
+				var  numberOfImages  = `${slides.length}` 
+				console.log(' numberOfImages  :',  numberOfImages)
+				// Number max of images in TABLE 
+				var numberOfImagesTable = `${slides.length - 1}` 
+				console.log(' numberOfImagesTable  :', numberOfImagesTable)
 
-// Number of images
-slides.length
-const  numberOfImages  = slides.length 
-console.log(' numberOfImages  :',  numberOfImages )
+				// First image selected
+				const selectedImage = document.getElementById(`img-carousel`)	
+				// Wrote image name on carousel
+				const imageNameCarousel = document.getElementById("img-name-carousel")
+				// imageNameCarousel.textContent =  slides[imagePosition].title
+				// CLICK ON ARROWS //
+				let leftArrow = document.querySelector(".arrow_left");
+				leftArrow.addEventListener("click", left)
+				let rightArrow = document.querySelector(".arrow_right");
+				rightArrow.addEventListener("click", right)
 
-// Number max of images in TABLE 
-const numberOfImagesTable= slides.length - 1 
-console.log(' numberOfImagesTable  :', numberOfImagesTable)
+				function left() {
+					let imagePosition = selectedImage.className.replace('img-carousel-ID_', '')
+					console.log('Position actuelle de l\'image DÉBUT :' + imagePosition)
+					console.log('Position actuelle de l\'image début :', document.getElementById("img-carousel").className)
+					console.log(' numberOfImages  :', numberOfImages)
+					console.log(' numberOfImagesTable  :', numberOfImagesTable)
+					console.log("Gauche")
+					if (imagePosition === '0') {
+						imagePosition = numberOfImages - 1
 
-// Initial position of img
-let initialImagePosition = 0
-console.log('Position initial de l\'image :', initialImagePosition)
-let imagePosition = initialImagePosition
-console.log('Position actuelle de l\'image :', imagePosition)
+						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
+						imageNameCarousel.textContent = slides[imagePosition].title
+					}
+					else {
+						imagePosition = imagePosition - 1
 
-// Nbr dots selectors = Nbr imgs
-let numberOfDots =  numberOfImages  + 1
-let placeOfDots = document.getElementById("dots")
-for (let pas = 1; pas < numberOfDots ; pas++) {	
-	console.log("<a class=\"dot_link\"><div id=\"dot_0" + pas + "\" class=\"dot\"></div></a>")
-	let create_a =  document.createElement("a")
-	create_a.innerHTML = `<div id=\"dot_0` + pas + `\" class=\"dot\"></div>`
-	placeOfDots.append(create_a)
-}
+						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
+						imageNameCarousel.textContent =  slides[imagePosition].title
+					}
 
-// Initial position of dot
-let initialPlaceOfDots = document.getElementById(`dot_01`)		
-initialPlaceOfDots.setAttribute("class", "dot dot_selected");
-console.log(placeOfDots)
+					console.log('Position actuelle de l\'image FIN :', imagePosition)
+					console.log('Position actuelle de l\'image FIN :', document.getElementById("img-carousel").className)
+				}
+				function right() {
+					let imagePosition = selectedImage.className.replace('img-carousel-ID_', '')
+					
+					console.log('Position actuelle de l\'image DÉBUT :' + imagePosition)
+					console.log('Position actuelle de l\'image début :', document.getElementById("img-carousel").className)
+					console.log("Droite")
+					if (imagePosition === numberOfImagesTable) {
+						imagePosition = '0' 
+						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
+						imageNameCarousel.textContent =  slides[imagePosition].title
+					}
+					else {					
+						imagePosition = imagePosition - 1 + 2 // bug
+						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						
+						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
+						imageNameCarousel.textContent =  slides[imagePosition].title
+					}
 
-// || SELECTION DOT POSITION ||
-for (let pas = 1; pas < numberOfDots; pas++) {
-	let selectedPoints = document.querySelector(`#dot_0${pas}`)
-
-	// CLICK ON DOT //
-	selectedPoints.addEventListener("click", function () {
-		console.log(`click on dot_0${pas}`)
-
-		// Change image & text
-		document.getElementById("img-carousel").src = slides[pas + 1].imageUrl
-		// let newHeavyTagLine = document.getElementById("tag_line_heavy")		
-		// newHeavyTagLine.replaceChildren(slides[pas-1].tagLine_heavy)
-		// let newThinTagLine = document.getElementById("tag_line_thin")		
-		// newThinTagLine.replaceChildren(slides[pas - 1].tagLine_thin)
-		
-		// Make all dots empty
-		let selectAllDots = document.querySelectorAll("div.dot");
-		for (var i = 0; i < selectAllDots.length; ++i) {
-			var item = selectAllDots[i]
-			item.setAttribute("class", "dot")
-		}
-		// Make Selection dot full
-		let clickedDot = document.getElementById(`dot_0${pas}`)		
-		clickedDot.setAttribute("class", "dot dot_selected");
-		a
-		// Reset new dot positon
-		imagePosition = pas - 1
-
-		console.log(selectedPoints)
-		console.log('Position actuelle de l\'image :', imagePosition)
-	})
-}
-
-// CLICK ON ARROWS //
-let leftArrow = document.querySelector(".arrow_left");
-leftArrow.addEventListener("click", left)  
-let rightArrow = document.querySelector(".arrow_right");
-rightArrow.addEventListener("click", right)
-
-function left() {
-	console.log("Gauche")
-	if (imagePosition == 0) {
-		imagePosition =  numberOfImages  - 1
-	}
-	else {
-		imagePosition = imagePosition - 1
-	}
-
-	// Change image & text
-	// document.getElementById("img_position_slide").src = slides[pas].imageUrl
-	document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
-	// let newHeavyTagLine = document.getElementById("tag_line_heavy")		
-	// newHeavyTagLine.replaceChildren(slides[imagePosition].tagLine_heavy)
-	// let newThinTagLine = document.getElementById("tag_line_thin")		
-	// newThinTagLine.replaceChildren(slides[imagePosition].tagLine_thin)
-	
-	// DOT POSITION // 
-	if (imagePosition == numberOfImagesTable) {
-		// Make all dots empty
-		let selectAllDots = document.querySelectorAll("div.dot");
-		for (var i = 0; i < selectAllDots.length; ++i) {
-			var item = selectAllDots[i]
-			item.setAttribute("class", "dot")
-		}
-		// Make Selection dot full
-		let currentDot  = document.getElementById(`dot_0${imagePosition + 1}`)		
-		currentDot.setAttribute("class", "dot dot_selected");
-	}
-	else {
-		// Make all dots empty
-		let selectAllDots = document.querySelectorAll("div.dot");
-		for (var i = 0; i < selectAllDots.length; ++i) {
-			var item = selectAllDots[i]
-			item.setAttribute("class", "dot")
-		}
-		// Make Selection dot full
-		let currentDot = document.getElementById(`dot_0${imagePosition + 1}`)		
-		currentDot.setAttribute("class", "dot dot_selected");
-	}
-	console.log('Position actuelle de l\'image :', imagePosition)
-}
-function right() {
-	console.log("Droite")
-	if (imagePosition == numberOfImagesTable) {
-		imagePosition = 0 
-	}
-	else {
-		imagePosition = imagePosition + 1
-	}
-
-	// Change image & text
-	// document.getElementById("img_position_slide").src = slides[pas].imageUrl
-	document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
-	// let newHeavyTagLine = document.getElementById("tag_line_heavy")		
-	// newHeavyTagLine.replaceChildren(slides[imagePosition].tagLine_heavy)
-	// let newThinTagLine = document.getElementById("tag_line_thin")		
-	// newThinTagLine.replaceChildren(slides[imagePosition].tagLine_thin)
-
-	// DOT POSITION //
-	if (imagePosition == 0) {
-		// Make all dots empty
-		let selectAllDots = document.querySelectorAll("div.dot");
-		for (var i = 0; i < selectAllDots.length; ++i) {
-			var item = selectAllDots[i]
-			item.setAttribute("class", "dot")
-		}
-		// Make Selection dot full
-		let currentDot = document.getElementById(`dot_0${imagePosition + 1}`)		
-		currentDot.setAttribute("class", "dot dot_selected");
-	}
-	else {
-		// Make all dots empty
-		let selectAllDots = document.querySelectorAll("div.dot");
-		for (var i = 0; i < selectAllDots.length; ++i) {
-			var item = selectAllDots[i]
-			item.setAttribute("class", "dot")
-		}
-		// Make Selection dot full
-		let currentDot = document.getElementById(`dot_0${imagePosition + 1}`)		
-		currentDot.setAttribute("class", "dot dot_selected");
-	}	
-	console.log('Position actuelle de l\'image :', imagePosition)
-}
-
-
+					console.log('Position actuelle de l\'image FIN :', imagePosition)
+					console.log('Position actuelle de l\'image FIN :', document.getElementById("img-carousel").className)
+				}
 })
 		} else {
 			console.log("error get slide")
