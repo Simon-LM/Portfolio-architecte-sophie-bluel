@@ -8,7 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" >
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/9f8122b2b5.js" crossorigin="anonymous"></script>
 	<script src="./assets/scripts/index.js" async></script>
@@ -20,7 +20,7 @@
 			<i class="fa-regular fa-pen-to-square"></i>
 			Mode édition
 		</div>
-		<!-- <div id="background-modale" title="Cliquez pour fermer"></div> -->
+		<div id="background-modale" title="Cliquez pour fermer"></div>
 		<div id="modale">
 			<div class="modale__header">
 				<button id="modale-arrow-back"><span class="material-symbols-outlined">arrow_back</span></button>
@@ -31,18 +31,18 @@
 				<div class="gallery-modale"></div>
 				<div class="add-img-modale">
 					<form  name="fileinfo" id="image-form">
-						<label for="add-image" class="frame-add-img">
+						<div id="click-frame-add-img" class="frame-add-img">
 							<i id="icon-add-image" class="fa-regular fa-image"></i>
-							<div id="button-add-image" class="button">+ Ajouter photo</div>
+							<label for="add-image" id="button-add-image" class="button">+ Ajouter photo</label>
 							<div id="format-add-image">jpg, png : 4Mo max</div>
-							<input type="file" name="image" class="frame-add-img" id="add-image" alt="+Ajouter photo" accept="image/png, image/jpeg" required>
-							<img id="show-img-download" src="">
+							<input type="file" name="image" id="add-image" accept="image/png, image/jpeg" required>
+							<div id="show-img-download"></div>
 							<div id="show-size-img-download"></div>
-						</label>
+						</div>
 						<label for="file-name">Titre
 							<input type="text" name="title" id="file-name" placeholder="" value="" required>
 						</label>
-						<label for="id-categorie-choice">Catégorie
+						<label for="id-categories-choice">Catégorie
 							<select name="category" id="id-categories-choice" required>
 								<option value="" id="option-filter_00" selected disabled>Sélectionnez une catégorie</option>
 							</select>
@@ -101,8 +101,7 @@
 			<button id="carousel-close"><span class="material-symbols-outlined">close</span></button>
 			<a class="arrow arrow_left"><img src="./assets/icons/arrow_left.png" alt="Défiler vers la gauche"></a>
 			<a class="arrow arrow_right"><img src="./assets/icons/arrow_right.png" alt="Défiler vers la droite"></a>
-			<!-- <div id="dots"></div> -->
-			<img id="img-carousel" src="" alt="">
+			<div id="img-carousel"></div>
 			<div id="img-name-carousel"></div>
 		</div>
 	</section>

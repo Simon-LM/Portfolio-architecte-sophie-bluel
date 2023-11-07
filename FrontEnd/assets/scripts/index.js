@@ -59,11 +59,14 @@ function displayMainGallery(filterCategoriesSelected) {
             const imageNameCarousel = document.getElementById("img-name-carousel")
             const closeCarousel = document.getElementById("carousel-close")
             // // // CLICK ON IMAGE
+            var image = document.createElement("img")
             selectedImage.addEventListener("click", function () {
+              image.src = `${json[pas].imageUrl}`
+              image.id = "img-carousel"
+              imageCarousel.replaceChildren(image)
               imageCarousel.className = `img-carousel-ID_${pas}`
               carouselVisible.style.display = "flex"
               backgroundModale.style.display = "block"
-              imageCarousel.src = `${json[pas].imageUrl}`
               imageCarousel.alt = `${json[pas].title}`
 				      imageNameCarousel.textContent =  json[pas].title
             }) 
@@ -223,6 +226,7 @@ const validationButtonModale = document.getElementById("btn-modale--validation")
 const galleryModaleVisibility = document.querySelector(".gallery-modale")
 const addImageModaleVisibility = document.querySelector(".add-img-modale")
 const buttonAddImage = document.getElementById("btn-add-img")
+const clickFrameAddImage = document.getElementById("click-frame-add-img")
 const formAddImage = document.getElementById("image-form")
 const inputImageFiles = document.getElementById("add-image")
 const currentFiles = inputImageFiles.files
@@ -257,15 +261,9 @@ function closeModale(){
   backgroundModale.style.display = "none"
   modale.style.display = "none"
   console.log("Click for CLOSE the MODALE")
-  // let filterCategoriesSelectedModale = 0
-  
-  // refreshMainGallery()
-  // displayMainGallery(0)
-  // window.location = "../index.html"
 }
 crossModale.forEach(element => {
-  element.addEventListener("click", () => {
-    // refreshMainGallery()
+  element.addEventListener("click", () => {  
     closeModale()
   })
 })
@@ -302,8 +300,8 @@ validationButtonModale.addEventListener("click", () => {
 // // // // // ADD NEW IMAGE // // // // //
 
 // // //  Validation file SIZE & TYPE
-// const maxSize = 4000000;
-const maxSize = 3002000;
+const maxSize = 4000000;
+// const maxSize = 3002000;
 function validFileType(currentFiles) {
   const fileTypes = ["image/jpeg", "image/png"];
   let valid = true
@@ -381,14 +379,16 @@ formAddImage.addEventListener("change", () => {
     console.log(curFiles[0]?.name)
     console.log(curFiles[0]?.size)
     var image = document.createElement("img")
-    const framAddImage = document.querySelector(".frame-add-img")
+    const frameAddImage = document.querySelector(".frame-add-img")
     buttonAddImage.value = "Valider"
     backgroundModale.style.background = "black"
     if (curFiles[0] !== undefined) {
       image.src = window.URL.createObjectURL(curFiles[0])
+      image.id = "show-img-download"
+      showImage.replaceChildren(image)
       console.log(image?.src)
-      framAddImage.style.background = "#E8F1F7"
-      showImage.src = image?.src
+      frameAddImage.style.background = "#E8F1F7"
+      showImage.alt = `${curFiles[0]?.name}`
       showImage.style.opacity = "1"
       showSizeImage.textContent = returnFileSize(curFiles[0]?.size)
       showSizeImage.style.color = "black"
@@ -413,6 +413,7 @@ formAddImage.addEventListener("change", () => {
     }
     else {
       showImage.src = ""
+      showImage.alt = ""
       showSizeImage.style.display = "none"
       showSizeImage.textContent = " "
       showIconAddImage.style.display = "block"

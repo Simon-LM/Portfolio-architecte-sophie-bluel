@@ -439,7 +439,7 @@ footer nav ul {
 	justify-content: space-between;
 	align-items: center;
 }
-aieaei
+
 .title-modale {
 	position: sticky;
 	top: 10%;
@@ -595,6 +595,10 @@ option {
 	background-color: var(--hide-button-color);
 	color: var(--add-image-btn-text-color);
 	height: 1rem;
+	margin: 0.5rem;
+}
+#format-add-image {
+	margin-bottom: 1rem;
 }
 #modale .frame-add-img input {
 	/* visibility: hidden; */
@@ -605,7 +609,7 @@ option {
 	/* height: 1rem !important; */
 	/* height: 15rem !important; */
 	/* max-height: 16vmin !important; */
-	margin-top: -3rem;
+	margin-top: -1rem;
 }
 #modale .frame-add-img:focus-within {
 	outline: 2px solid black;
@@ -615,6 +619,7 @@ option {
 	opacity: 1;
 	max-height: calc(var(--modale-size) / 4);
 	max-width: calc(var(--modale-size) / 1.5);
+	margin-top: -0.5rem;
 }
 
 .modale__header button {
@@ -629,13 +634,9 @@ option {
 
 #show-size-img-download {
 	display: none;
-	/* position: fixed; */
-	/* top: calc((100vh - var(--modale-size)) / 1.5); */
 	font-size: 1rem;
-	margin-top: -3rem;
-	margin-bottom: 0.5rem;
-	/* margin-top: 1rem; */
-	/* color: var(--secondary-color); */
+	margin-top: -2rem;
+	margin-bottom: 0.25rem;
 	color: var(--main-color);
 	background: var(--add-image-color);
 	opacity: 0.75;

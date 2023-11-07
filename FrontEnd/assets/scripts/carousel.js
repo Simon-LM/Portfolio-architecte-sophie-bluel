@@ -1,6 +1,4 @@
 console.log("CAROUSEL");
-// const selectedImage = document.getElementById(`img-carousel`)	
-
 
 const urlCarouselAPI = "http://localhost:5678/api/works"
 fetch(urlCarouselAPI)
@@ -19,15 +17,15 @@ fetch(urlCarouselAPI)
 				console.log(' numberOfImagesTable  :', numberOfImagesTable)
 
 				// First image selected
-				const selectedImage = document.getElementById(`img-carousel`)	
+				const selectedImage = document.getElementById(`img-carousel`)
 				// Wrote image name on carousel
 				const imageNameCarousel = document.getElementById("img-name-carousel")
-				// imageNameCarousel.textContent =  slides[imagePosition].title
 				// CLICK ON ARROWS //
 				let leftArrow = document.querySelector(".arrow_left");
 				leftArrow.addEventListener("click", left)
 				let rightArrow = document.querySelector(".arrow_right");
 				rightArrow.addEventListener("click", right)
+				var image = document.createElement("img")
 
 				function left() {
 					let imagePosition = selectedImage.className.replace('img-carousel-ID_', '')
@@ -39,14 +37,20 @@ fetch(urlCarouselAPI)
 					if (imagePosition === '0') {
 						imagePosition = numberOfImages - 1
 
-						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						image.src = slides[imagePosition].imageUrl
+              			image.id = "img-carousel"
+						selectedImage.replaceChildren(image)
+
 						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
 						imageNameCarousel.textContent = slides[imagePosition].title
 					}
 					else {
 						imagePosition = imagePosition - 1
 
-						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+						image.src = slides[imagePosition].imageUrl
+              			image.id = "img-carousel"
+						selectedImage.replaceChildren(image)
+
 						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
 						imageNameCarousel.textContent =  slides[imagePosition].title
 					}
@@ -62,18 +66,24 @@ fetch(urlCarouselAPI)
 					console.log("Droite")
 					if (imagePosition === numberOfImagesTable) {
 						imagePosition = '0' 
-						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
+
+						image.src = slides[imagePosition].imageUrl
+              			image.id = "img-carousel"
+						selectedImage.replaceChildren(image)
+
 						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
 						imageNameCarousel.textContent =  slides[imagePosition].title
 					}
 					else {					
 						imagePosition = imagePosition - 1 + 2 // bug
-						document.getElementById("img-carousel").src = slides[imagePosition].imageUrl
-						
+
+						image.src = slides[imagePosition].imageUrl
+              			image.id = "img-carousel"
+						selectedImage.replaceChildren(image)
+
 						document.getElementById("img-carousel").className = `img-carousel-ID_${imagePosition}`
 						imageNameCarousel.textContent =  slides[imagePosition].title
 					}
-
 					console.log('Position actuelle de l\'image FIN :', imagePosition)
 					console.log('Position actuelle de l\'image FIN :', document.getElementById("img-carousel").className)
 				}
