@@ -61,13 +61,11 @@ table {
 --add-image-btn-text-color: #306685;
 }
 
-
-
 a, nav {
 	color: var(--main-color);
 	text-decoration: none;	
 }
-a:hover, nav:hover {
+a:hover, nav:hover, a:focus-visible, nav:focus-visible  {
 	color: var(--primary-color);
 	cursor: pointer;	
 }
@@ -119,7 +117,7 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-nav li:hover {
+nav li:hover, nav li a:focus-visible {
 	color: var(--primary-color);
 }
 
@@ -157,9 +155,16 @@ nav li:hover {
 }
 #portfolio .gallery img {
 	width: 100%;
-
 }
-
+.gallery button {
+	background: transparent;
+	border: none;
+	padding-top: 0.4rem;
+}
+.gallery button:hover, .gallery button:focus-visible {
+	cursor: pointer;
+	opacity: 0.75;
+}
 #contact, #authentication {
 	width: 50%;
 	margin: auto;
@@ -182,6 +187,9 @@ nav li:hover {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	padding: 1em;
+}
+#contact .button-contact {
+	min-width: 15rem;
 }
 #contact label, #authentication label {
 	margin: 2em 0 1em 0;
@@ -250,9 +258,9 @@ label {
 	width: 2rem;
 	margin-left: -2rem;
 }
-button .password-icon:hover {
+button .password-icon:hover, button .password-icon:focus-visible {
+	opacity: 0.80;	
 	cursor: pointer;
-	opacity: 0.80;
 }
 button .icon-eye {
 	font-size: 1rem;
@@ -300,7 +308,7 @@ footer nav ul {
     min-width: 6em; 
 	cursor: pointer;
 }
-#filters .button:hover, #modale .button {
+#filters .button:hover, #filters .button:focus-visible, #modale .button {
     background-color: var(--primary-color);
 	color: var(--main-bg-color);
 }
@@ -309,7 +317,7 @@ footer nav ul {
 	width: fit-content; 
 	padding: 1em 2em;
 }
-#modale .button:hover {
+#modale .button:hover, #modale .button:focus-visible {
 	opacity: 0.80;
 }
 #modale .hide-button {
@@ -356,9 +364,11 @@ footer nav ul {
 	font-size: 1rem;
 	font-weight: 500;
 	padding-left: 1em;
+	background: transparent;
+	border: none;
 }
 
-.edit:hover {
+.edit:hover, .edit:focus-visible {
 	cursor: pointer;
 	color: var(--primary-color);
 }
@@ -504,7 +514,7 @@ footer nav ul {
 #modale #btn-trash:hover {
 	cursor: pointer;
 }
-#modale #btn-trash:hover + img {
+#modale #btn-trash:hover + img, #modale #btn-trash:focus-visible + img {
 	opacity: 0.8;
 }
 /* ADD IMAGE */
@@ -632,6 +642,9 @@ option {
 .glyph-instagram:hover .glyph-instagram-black {
 	display: none;
 }
+.glyph-instagram:focus-visible .glyph-instagram-black {
+	display: none;
+}
 .glyph-instagram .glyph-instagram-green {
 	display: none;
 	justify-content: center;
@@ -639,6 +652,9 @@ option {
 	height: 1.5rem;
 }
 .glyph-instagram:hover .glyph-instagram-green {
+	display: block;
+}
+.glyph-instagram:focus-visible .glyph-instagram-green {
 	display: block;
 }
 
@@ -672,32 +688,12 @@ option {
 }
 
 /* Gestion des points du carrousel */
-#dots {
-	position: absolute;
-	bottom: 2rem;
-	display: flex;
-}
-
-.dot {
-	margin-inline: 0.33rem;
-	width: 1rem;
-	height: 1rem;
-	background-color: #ffffff00;
-	border: 3px solid #fff;
-	border-radius: 100%;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-.dot:hover {
-	opacity: 0.75;
-}
-.dot_selected {
-	background-color: #fff;	
-}
-
 #carousel .arrow {
 	position: absolute;
+	background: transparent;
+	border: none;
 }
-#carousel .arrow:hover {
+#carousel .arrow:hover, #carousel .arrow:focus-visible  {
 	opacity: 0.75;
 }
 #carousel .arrow_left {

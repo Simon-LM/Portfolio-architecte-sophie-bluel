@@ -39,7 +39,7 @@ function displayMainGallery(filterCategoriesSelected) {
       return response.json()
         .then(function (json) {
           for (let pas = 0; pas < json.length; pas++) {
-            let createFigure = document.createElement("figure")
+            let createFigure = document.createElement("button")
             createFigure.innerHTML = `<img src="${json[pas].imageUrl}" id="img-carousel-ID_${pas}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
             let categoryId = json[pas].categoryId
             if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
@@ -52,7 +52,8 @@ function displayMainGallery(filterCategoriesSelected) {
           }
           // // // CAROUSEL
           for (let pas = 0; pas < json.length; pas++) {
-            let selectedImage = document.querySelector(`#img-carousel-ID_${pas}`)
+            let selectedButtonImage = document.querySelectorAll(`.gallery button`)
+            // let selectedImage = document.querySelector(`#img-carousel-ID_${pas}`)
             let carouselVisible = document.getElementById("carousel")
             let imageCarousel = document.getElementById("img-carousel")
             carouselVisible.style.display = "none"
@@ -60,16 +61,20 @@ function displayMainGallery(filterCategoriesSelected) {
             const closeCarousel = document.getElementById("carousel-close")
             // // // CLICK ON IMAGE
             var image = document.createElement("img")
-            selectedImage.addEventListener("click", function () {
-              image.src = `${json[pas].imageUrl}`
-              image.id = "img-carousel"
-              imageCarousel.replaceChildren(image)
-              imageCarousel.className = `img-carousel-ID_${pas}`
-              carouselVisible.style.display = "flex"
-              backgroundModale.style.display = "block"
-              imageCarousel.alt = `${json[pas].title}`
-				      imageNameCarousel.textContent =  json[pas].title
-            }) 
+            selectedButtonImage.forEach(imageClicked => {
+              imageClicked.addEventListener("click", function () {
+                nbrID = imageClicked.firstChild.id.replace("img-carousel-ID_","")
+                console.log(nbrID)
+                image.src = imageClicked.firstChild.src
+                image.id = "img-carousel"
+                imageCarousel.replaceChildren(image)
+                imageCarousel.className = `img-carousel-ID_${nbrID}`
+                carouselVisible.style.display = "flex"
+                backgroundModale.style.display = "block"
+                imageCarousel.alt = json[nbrID].title
+				        imageNameCarousel.textContent = json[nbrID].title
+              }) 
+            })
             function clickToCloseTheCarousel() {              
               backgroundModale.style.display = "none"
               carouselVisible.style.display = "none"
