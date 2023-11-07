@@ -23,11 +23,14 @@
 		<div id="background-modale" title="Cliquez pour fermer"></div>
 		<div id="modale">
 			<div class="modale__header">
-				<button id="modale-arrow-back"><span class="material-symbols-outlined">arrow_back</span></button>
-				<button id="modale-close"><span class="material-symbols-outlined">close</span></button>
+				<div id="modale__header__arrow-close">
+					<button id="modale-arrow-back"><span class="material-symbols-outlined">arrow_back</span></button>
+					<button id="modale-close"><span class="material-symbols-outlined">close</span></button>
+				</div>
+				<h3 id="title-modale" class="title-modale">Galerie photo</h3>
 			</div>
 			<div class="content-modale">
-				<h3 id="title-modale" class="title-modale">Galerie photo</h3>
+				<!-- <h3 id="title-modale" class="title-modale">Galerie photo</h3> -->
 				<div class="gallery-modale"></div>
 				<div class="add-img-modale">
 					<form  name="fileinfo" id="image-form">
@@ -47,14 +50,18 @@
 								<option value="" id="option-filter_00" selected disabled>Sélectionnez une catégorie</option>
 							</select>
 						</label>
-						<input type="submit" value="Valider" id=btn-add-img class="">
+						<div id="bottom_form-add-img">
+							<div id="error-message" class="line-modale"></div>
+							<input type="submit" value="Valider" id=btn-add-img class="">
+						</div>
 					</form>
 				</div>
-				<div class="bottom-modale">
-					<div class="line-modale"></div>
-					<button id="btn-modale--validation" class="button">Ajouter une photo</button>
-				</div>
 			</div>
+			<div id="bottom-modale" class="bottom-modale">
+				<div id="line-modale" class="line-modale"></div>
+				<button id="btn-modale--validation" class="button">Ajouter une photo</button>
+			</div>
+			<!-- </div> -->
 		</div>
 	</section>
 <header>

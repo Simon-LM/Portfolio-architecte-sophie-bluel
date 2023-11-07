@@ -1,4 +1,4 @@
-console.log("Page JAvaScripte | MODALE")
+console.log("Page JavaScripte | INDEX")
 
 // // // LOGOUT // // //
 const editingBar = document.querySelector("#editing-bar")
@@ -237,6 +237,9 @@ const showButtonAddImage = document.getElementById("button-add-image")
 const showFormatAddImage = document.getElementById("format-add-image")
 const showImage = document.getElementById("show-img-download")
 const showSizeImage = document.getElementById("show-size-img-download")
+const lineModale = document.getElementById("line-modale")
+const bottomModale = document.getElementById("bottom-modale")
+const errorMessage = document.getElementById("error-message")
 
 // // //  HIDE MODALE
 const backgroundModale = document.getElementById("background-modale")
@@ -248,7 +251,7 @@ const openModale = document.querySelectorAll(".fa-pen-to-square, .edit")
 openModale.forEach(element => {
   element.addEventListener("click", () => {
       backgroundModale.style.display = "block"
-      modale.style.display = "block"
+      modale.style.display = "flex"
     console.log("Click for OPEN the MODALE")
     galleryModaleVisibility.replaceChildren()
     galleryModale(0)
@@ -276,10 +279,27 @@ arrowBackModale.addEventListener("click", () => {
   validationButtonModale.style.visibility = "visible"
   titleModale.textContent = "Galerie photo"
   validationButtonModale.setAttribute("class", "button")        
-  galleryModaleVisibility.style.visibility = "visible"
-  galleryModaleVisibility.style.position = "fixed"
-  addImageModaleVisibility.style.visibility = "collapse"
-  addImageModaleVisibility.style.position = "initial"
+  galleryModaleVisibility.style.display = "grid"
+  addImageModaleVisibility.style.display = "none"
+  lineModale.style.display = "flex"
+  bottomModale.style.display = "flex"
+  backgroundModale.style.background = "#3D3D3D"
+  inputImageFiles.value = ''  
+  showSizeImage.style.display = 'none'
+  inputImageName.value = ''
+  inputCategory.value = ''
+  inputCategory.style.color = "#A7A7A7"
+  showImage.firstChild.src = ''
+  showImage.firstChild.alt = ""
+  showSizeImage.textContent = " "
+  showIconAddImage.style.display = "block"
+  showButtonAddImage.style.display = "flex"
+  showFormatAddImage.style.display = "block"
+  buttonAddImage.setAttribute("class", "hide-button")
+  buttonAddImage.textContent = "Valider"
+  clickFrameAddImage.style.cursor = "default"
+  clickFrameAddImage.title = ''
+  errorMessage.textContent = ''
 })
 // // //  BUTTON ADD IMAGE
 validationButtonModale.addEventListener("click", () => {
@@ -290,10 +310,11 @@ validationButtonModale.addEventListener("click", () => {
     validationButtonModale.style.visibility = "hidden"
     titleModale.textContent = "Ajout photo"
     arrowBackModale.style.visibility = "visible"
-    galleryModaleVisibility.style.visibility = "collapse"
-    galleryModaleVisibility.style.position = "initial"
+    galleryModaleVisibility.style.display = "none"
+    addImageModaleVisibility.style.display = "flex"
+    bottomModale.style.display = "none"
     addImageModaleVisibility.style.visibility = "visible"
-    addImageModaleVisibility.style.position = "fixed"
+    lineModale.style.display = "none"    
   }    
 })
 
@@ -396,11 +417,14 @@ formAddImage.addEventListener("change", () => {
       showIconAddImage.style.display = "none"
       showButtonAddImage.style.display = "none"
       showFormatAddImage.style.display = "none"
+      clickFrameAddImage.style.cursor = "pointer"
+      clickFrameAddImage.title = "Supprimer"
+      errorMessage.textContent = ''
       if (curFiles[0]?.size > maxSize) {
         showImage.style.opacity = "0.5"
         backgroundModale.style.background = "#B1663C"
-        buttonAddImage.value = "Image trop lourd"
-        buttonAddImage.setAttribute("class", "red-button")
+        errorMessage.textContent = "Image trop lourd"
+        errorMessage.style.color = "red"
         showSizeImage.style.color = "red"
         showSizeImage.textContent = returnFileSize(curFiles[0]?.size) + ` / 4 Mo`
       }
@@ -412,8 +436,8 @@ formAddImage.addEventListener("change", () => {
       }   
     }
     else {
-      showImage.src = ""
-      showImage.alt = ""
+      showImage.firstChild.src = ""
+      showImage.firstChild.alt = ""
       showSizeImage.style.display = "none"
       showSizeImage.textContent = " "
       showIconAddImage.style.display = "block"
@@ -430,6 +454,28 @@ formAddImage.addEventListener("change", () => {
     buttonAddImage.setAttribute("class", "hide-button")
   }
 })
+// // //  REMOVE IMAGE
+clickFrameAddImage.addEventListener("click", () => {
+  console.log("Click for REMOVE IMAGE")
+  backgroundModale.style.background = "#3D3D3D"
+  inputImageFiles.value = ''  
+  showSizeImage.style.display = 'none'
+  inputImageName.value = ''
+  inputCategory.value = ''
+  inputCategory.style.color = "#A7A7A7"
+  showImage.firstChild.src = ''
+  showImage.firstChild.alt = ''
+  showSizeImage.textContent = " "
+  showIconAddImage.style.display = "block"
+  showButtonAddImage.style.display = "flex"
+  showFormatAddImage.style.display = "block"
+  buttonAddImage.setAttribute("class", "hide-button")
+  buttonAddImage.textContent = "Valider"
+  clickFrameAddImage.style.cursor = "default"
+  clickFrameAddImage.title = ''
+  errorMessage.textContent = ''
+})
+
 // // // REFRESH Input/Select Categories
 inputCategory.addEventListener("change", () => {
   inputCategory.style.color= "inherit"
