@@ -9,7 +9,6 @@ fetch(urlCarouselAPI)
 				slides = json
 				console.log(slides)
 				// Number of images
-				// slides.length
 				var  numberOfImages  = `${slides.length}` 
 				console.log(' numberOfImages  :',  numberOfImages)
 				// Number max of images in TABLE 
@@ -29,11 +28,8 @@ fetch(urlCarouselAPI)
 
 				function left() {
 					let imagePosition = selectedImage.className.replace('img-carousel-ID_', '')
-					console.log('Position actuelle de l\'image DÉBUT :' + imagePosition)
-					console.log('Position actuelle de l\'image début :', document.getElementById("img-carousel").className)
-					console.log(' numberOfImages  :', numberOfImages)
-					console.log(' numberOfImagesTable  :', numberOfImagesTable)
-					console.log("Gauche")
+					// console.log('Position actuelle de l\'image DÉBUT :' + imagePosition)
+					console.log("Left arrow Carousel")
 					if (imagePosition === '0') {
 						imagePosition = numberOfImages - 1
 
@@ -56,14 +52,12 @@ fetch(urlCarouselAPI)
 					}
 
 					console.log('Position actuelle de l\'image FIN :', imagePosition)
-					console.log('Position actuelle de l\'image FIN :', document.getElementById("img-carousel").className)
 				}
 				function right() {
 					let imagePosition = selectedImage.className.replace('img-carousel-ID_', '')
 					
 					console.log('Position actuelle de l\'image DÉBUT :' + imagePosition)
-					console.log('Position actuelle de l\'image début :', document.getElementById("img-carousel").className)
-					console.log("Droite")
+					console.log("Right arrow Carousel")
 					if (imagePosition === numberOfImagesTable) {
 						imagePosition = '0' 
 
@@ -85,7 +79,6 @@ fetch(urlCarouselAPI)
 						imageNameCarousel.textContent =  slides[imagePosition].title
 					}
 					console.log('Position actuelle de l\'image FIN :', imagePosition)
-					console.log('Position actuelle de l\'image FIN :', document.getElementById("img-carousel").className)
 				}
 })
 		} else {
