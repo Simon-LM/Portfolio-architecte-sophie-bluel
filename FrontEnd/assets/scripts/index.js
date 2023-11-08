@@ -39,14 +39,15 @@ function displayMainGallery(filterCategoriesSelected) {
       return response.json()
         .then(function (json) {
           for (let pas = 0; pas < json.length; pas++) {
-            let createFigure = document.createElement("button")
-            createFigure.innerHTML = `<img src="${json[pas].imageUrl}" id="img-carousel-ID_${pas}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption>`
+
+            let createButton = document.createElement("button")
+            createButton.innerHTML = `<figure><img src="${json[pas].imageUrl}" id="img-carousel-ID_${pas}" class="img_${json[pas].id}" alt="${json[pas].title}"><figcaption>${json[pas].title}</figcaption></figure>`
             let categoryId = json[pas].categoryId
             if (categoryId !== filterCategoriesSelected & filterCategoriesSelected !== 0) {
               // // // // // // // //  CLEAN 
             }
             else {
-              galleryLocationHTML.append(createFigure)
+              galleryLocationHTML.append(createButton)
             }
             console.log(response.status)
           }
@@ -63,9 +64,9 @@ function displayMainGallery(filterCategoriesSelected) {
             var image = document.createElement("img")
             selectedButtonImage.forEach(imageClicked => {
               imageClicked.addEventListener("click", function () {
-                nbrID = imageClicked.firstChild.id.replace("img-carousel-ID_","")
+                nbrID = imageClicked.firstChild.firstChild.id.replace("img-carousel-ID_","")
                 console.log(nbrID)
-                image.src = imageClicked.firstChild.src
+                image.src = imageClicked.firstChild.firstChild.src
                 image.id = "img-carousel"
                 imageCarousel.replaceChildren(image)
                 imageCarousel.className = `img-carousel-ID_${nbrID}`
@@ -468,8 +469,8 @@ clickFrameAddImage.addEventListener("click", () => {
   inputImageName.value = ''
   inputCategory.value = ''
   inputCategory.style.color = "#A7A7A7"
-  showImage.firstChild.src = ''
-  showImage.firstChild.alt = ''
+  showImage.firstChild.src = '' 
+  showImage.firstChild.alt = '' 
   showSizeImage.textContent = " "
   showIconAddImage.style.display = "block"
   showButtonAddImage.style.display = "flex"

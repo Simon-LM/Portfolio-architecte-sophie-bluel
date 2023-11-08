@@ -60,7 +60,11 @@ table {
 --add-image-icon-color: #CBD6DC;
 --add-image-btn-text-color: #306685;
 }
-
+*:focus-visible {
+	border: none;
+	outline: 3px solid var(--primary-color);
+	outline-offset: 3px;
+}
 a, nav {
 	color: var(--main-color);
 	text-decoration: none;	
@@ -589,7 +593,8 @@ option {
 	margin-top: -1rem;
 }
 #modale .frame-add-img:focus-within {
-	outline: 2px solid black;
+	outline: 3px solid var(--primary-color);
+	outline-offset: 3px;
 }
 #show-img-download {
 	opacity: 1;
@@ -695,6 +700,7 @@ option {
 }
 #carousel .arrow:hover, #carousel .arrow:focus-visible  {
 	opacity: 0.75;
+	color: var(--primary-color);
 }
 #carousel .arrow_left {
 	left: 1.5rem;
@@ -723,6 +729,15 @@ option {
 	padding: 0.5em;
 	margin-top: 0.25rem;
 	margin-bottom: -2.5rem;
+}
+#carousel-close:focus-visible {
+	border: none;
+	outline: none;
+}
+#carousel-close:focus-visible span {
+	border: none;
+	outline: 3px solid var(--primary-color);
+	opacity: 0.80;
 }
 #carousel-close span{
 	cursor: pointer;
